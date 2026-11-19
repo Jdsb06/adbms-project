@@ -1,0 +1,60 @@
+*** Optimizer Start *** (wctrlFlags: 0x0)
+    add: * 0.01.00            r                     f 004000 N 1 cost 63,45,43
+replace: * 0.01.00            r                     f 004000 N 1 cost 63,45,43
+   with: * 0.01.00            r                     f 800100 N 0 cost 0,39,3
+    add: * 0.01.02            r                     f 801101 N 1 cost 0,24,-1
+    add: * 1.02.00            n                     f 000100 N 0 cost 0,62,46
+    add: * 1.02.04            n                     f 001101 N 1 cost 0,29,0
+    add: * 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23
+   skip: * 1.02.05            n.idx_nation_regionkey  2 f 011201 N 2 cost 0,32,0
+    add: * 2.04.00            c                     f 000100 N 0 cost 0,188,172
+replace: * 2.04.00            c                     f 000100 N 0 cost 0,188,172
+   with: * 2.04.00            c.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172
+    add: * 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125
+0 0.01.00            r                     f 800100 N 0 cost 0,39,3
+1 0.01.02            r                     f 801101 N 1 cost 0,24,-1
+2 1.02.00            n                     f 000100 N 0 cost 0,62,46
+3 1.02.04            n                     f 001101 N 1 cost 0,29,0
+4 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23
+5 2.04.00            c.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172
+6 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125
+---- begin solver.  (nRowEst=0, nQueryLoop=0)
+New    0 cost=40 ,  3, 38 order=0
+New    2 cost=62 , 46, 60 order=0
+New    5 cost=178,172,176 order=0
+---- after round 0 ----
+ 0 cost=40  nrow=3   order=0
+ 2 cost=62  nrow=46  order=0
+ 5 cost=178 nrow=172 order=0
+New    02 cost=67 , 49, 65 order=0
+Update 04 cost=56 , 26, 54 order=0  was 02 cost=67 , 49, 65 order=0
+New    05 cost=181,175,179 order=0
+Skip   20 cost=87 , 49, 85 order=0   vs 04 cost=56 , 26, 54 order=0
+Skip   21 cost=76 , 45, 74 order=0   vs 04 cost=56 , 26, 54 order=0
+New    25 cost=224,218,222 order=0
+Update 26 cost=177,171,175 order=0  was 25 cost=224,218,222 order=0
+Skip   50 cost=212,175,210 order=0   vs 05 cost=181,175,179 order=0
+Skip   52 cost=234,218,232 order=0   vs 26 cost=177,171,175 order=0
+Skip   53 cost=203,172,201 order=0   vs 26 cost=177,171,175 order=0
+---- after round 1 ----
+ 04 cost=56  nrow=26  order=0
+ 26 cost=177 nrow=171 order=0
+ 05 cost=181 nrow=175 order=0
+New    045 cost=204,198,202 order=0
+Update 046 cost=157,151,155 order=0  was 045 cost=204,198,202 order=0
+Skip   052 cost=237,221,235 order=0   vs 046 cost=157,151,155 order=0
+Skip   053 cost=206,175,204 order=0   vs 046 cost=157,151,155 order=0
+Skip   054 cost=224,198,222 order=0   vs 046 cost=157,151,155 order=0
+Skip   260 cost=211,174,209 order=0   vs 046 cost=157,151,155 order=0
+Skip   261 cost=198,170,196 order=0   vs 046 cost=157,151,155 order=0
+---- after round 2 ----
+ 046 cost=157 nrow=151 order=0
+---- Solution cost=157, nRow=151
+0 0.01.00            r                     f 800100 N 0 cost 0,39,3
+4 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23
+6 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125
+*** Optimizer Finished ***
+QUERY PLAN
+|--SCAN r
+|--SEARCH n USING INDEX idx_nation_regionkey (n_regionkey=?)
+`--SEARCH c USING COVERING INDEX idx_customer_nationkey (c_nationkey=?)

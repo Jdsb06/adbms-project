@@ -1,0 +1,12 @@
+.bail on
+SELECT 1 FROM sqlite_stat1 LIMIT 1;
+.wheretrace 0x001c008e
+.print ===PROJECT_TRACE_BEGIN===
+EXPLAIN QUERY PLAN
+-- Two references still permit different loop orders and access methods.
+SELECT r.r_name, n.n_name
+FROM region AS r
+JOIN nation AS n ON n.n_regionkey = r.r_regionkey
+WHERE r.r_name = 'AMERICA';
+
+.wheretrace 0

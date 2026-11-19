@@ -1,0 +1,174 @@
+# Understand the investigation
+
+The viewer and report are ready-made tools. Your learning task is to explain
+the evidence without reading their explanations aloud. Work through this
+guide in 3–4 hours per day. Do not mark a checkpoint complete until you have
+answered it yourself.
+
+## Start with the worked three-table example
+
+Open `viewer/index.html`, select **3 tables · region chain**, and move to the
+second round in **Expand this round**. Count the six table orders, then
+select `02`, `04`, and `03` under `r → n`. Use the **Access code legend**
+to explain why the three paths share a table order. Check the two logged
+decisions in `evidence/join3.trace.txt`. The `03` screen is inferred from
+the source's prerequisite check and the traced access method.
+
+The important update is:
+
+```text
+New    02 cost=67 , 49, 65 order=0
+Update 04 cost=56 , 26, 54 order=0  was 02 cost=67 , 49, 65 order=0
+```
+
+`0` is the region scan; `2` is the nation scan; `4` accesses nation using
+`idx_nation_regionkey`. Both candidates visit region then nation. Path `04`
+can use region's key to constrain the nation index. It estimates less work
+and fewer output rows than the scan extension. These are optimizer estimates,
+not literal row counts or elapsed times. At this point N=12 and only three
+subsets survive; this replacement is not caused by a full N-slot buffer.
+
+Now explain these three facts in your own words:
+
+- Why does loop `4` require mask `0x1` before it can be used?
+- Why does changing `02` into `04` change the access method without changing
+  the table order?
+- Why does path `046` mean `r → n → c` rather than three unnamed tables?
+
+## Day 1 on November 19
+
+Read `sql/learning/03_region_nation_customer.sql` and the schema. Draw region,
+nation and customer, with keys on edges. Write a nested-loop version of the
+query as pseudocode. Predict whether region or customer should be outermost
+and why; prediction is allowed to be wrong.
+
+Explain scan, constrained index search, covering index, selectivity,
+cardinality and repeated inner-loop work. A small outer result can make a
+lookup-based inner loop cheap even when a standalone access seems expensive.
+
+- [ ] I can explain `02 → 04` without notes.
+- [ ] I can distinguish the logical join graph from the optimizer search graph.
+
+## Day 2 on November 20
+
+Open `src/sqlite-src-3540100/src/whereInt.h`. Read `WhereLoop` and `WherePath`.
+Then open `where.c` at `wherePathSolver`. Locate dependency checks, cost
+calculation, compatible-subset comparison, the full-buffer check, and copying
+the accepted path into `pTo`.
+
+Launch an interactive debugger from the project root:
+
+```bash
+gdb --args ./build/sqlite-debug/sqlite3d -readonly data/tpch-sf1/tpch.db \
+  "EXPLAIN QUERY PLAN SELECT r.r_name,n.n_name,c.c_custkey FROM region r JOIN nation n ON n.n_regionkey=r.r_regionkey JOIN customer c ON c.c_nationkey=n.n_nationkey WHERE r.r_name='AMERICA';"
+```
+
+Inside GDB:
+
+```text
+set pagination off
+set debuginfod enabled off
+break wherePathSolver if pWInfo->nLevel == 3
+run
+bt
+print nRowEst
+print pWInfo->nLevel
+list
+```
+
+At function entry, `mxChoice` is not initialized. Advance to the allocation
+line `nSpace = (sizeof(WherePath)...`, then print `mxChoice`, `nLoop`, and
+`nOrderBy`. In this pinned source that line is 5903; search the source again
+if you replace it. Read masks in hexadecimal with `print /x`.
+
+Use the generated `evidence/debugger/join3.gdb` for exact automated stops,
+or inspect its commands and set the same breakpoints interactively. That
+script expects the trace labels assigned by `.wheretrace 0x100000`; use
+`scripts/capture_debugger.py` to reproduce its complete invocation.
+
+- [ ] I can show real values in C rather than only reading a final EQP.
+- [ ] I can explain why a breakpoint at function entry cannot validate an
+  uninitialized local variable.
+
+## Day 3 on November 21
+
+Rerun `python3 scripts/capture_traces.py` and the Python tests. Manually check
+the three retained generations:
+
+| Depth | Paths and estimated costs |
+| --- | --- |
+| 1 | `0:40`, `2:62`, `5:178` |
+| 2 | `04:56`, `26:177`, `05:181` |
+| 3 | `046:157` |
+
+Read `docs/data-format.md`. Find a New event, an Update event, a Skip with a
+competitor, and a Q8 Skip without one. Explain what is known in each case.
+
+- [ ] I can explain why counting trace lines does not count every possible plan.
+- [ ] I can trace one JSON source-line pointer back to the original log.
+
+## Day 4 on November 22
+
+Use the viewer as a debugger companion. Inspect an earlier node, then a
+candidate decision. Compare the node's path code with its access methods.
+Find two paths with the same table sequence but different access methods.
+Explain why the visualization replays snapshots rather than inventing
+individual eviction animations. Open the HTML while offline.
+
+- [ ] I can demonstrate navigation and raw evidence inspection fluently.
+- [ ] I can explain which pieces were generated by Python versus SQLite.
+
+## Day 5 on November 23
+
+Read full Q8 and draw its eight aliases. Explain that the region restriction
+applies to the customer nation `n1`, while market share uses the supplier
+nation `n2`. `partsupp` exists in the dataset but is not a Q8 join reference.
+
+Compare Q8's two solver passes. The first obtains an estimate without sort
+cost; the second considers ordering after an interstage heuristic disables
+some loops. This is not the database executing the query twice.
+
+Inspect the GDB observations for default N=18 and disabled N=12. Explain why
+the experiment changes both cost adjustment and breadth, and why unchanged
+final order is still an informative observation.
+
+- [ ] I can explain both nation aliases and all seven join edges.
+- [ ] I can explain the different search counts without claiming a speedup.
+
+## Day 6 on November 24
+
+Review the Word report paragraph by paragraph. Replace wording you cannot
+explain. Cross-check measured numbers in `evidence/project.json`. Verify the
+source references in your local checkout. Read the short System-R and
+Cascades comparisons against your class notes; no class-note content was
+available when this implementation was prepared.
+
+- [ ] I can distinguish per-subset dynamic programming, rule/memo-based search,
+  and SQLite's bounded frontier of partial loop sequences.
+- [ ] I can identify at least three study limitations without inventing failures.
+
+## Day 7 on November 25
+
+Follow `docs/demo.md` twice, once with the live debugger and once using saved
+evidence. Have someone interrupt you with questions. Explain each answer
+before opening the supporting log. Reserve November 26–28 for weak areas,
+report corrections, and slides if the instructor asks for them.
+
+- [ ] I can complete an 8–10 minute explanation without AI.
+- [ ] I have checked the exact submission deadline, required format, and whether
+  slides are required with the course instructions.
+
+## Questions you should be able to answer
+
+1. What exactly is being optimized: SQL syntax, access methods, loop order,
+   physical execution, or several of these at different stages?
+2. Why is N independent of the number of tables K? Does N=K ensure optimality?
+3. What information must a partial path carry besides cost?
+4. How can a cheap prefix become an expensive complete plan?
+5. Why can a more expensive prefix be worth preserving?
+6. Why does this implementation keep only one full path in the final round?
+7. Can two paths for the same subset differ in useful ordering properties?
+8. Why do indexes and statistics influence join order even with identical SQL?
+9. What does increasing cost by 10 mean in LogEst, approximately?
+10. What does this project demonstrate, and what would require execution
+    benchmarks or an exhaustive oracle to establish?

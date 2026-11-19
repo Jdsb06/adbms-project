@@ -1,0 +1,423 @@
+{
+  "id": "join2",
+  "title": "2 tables \u00b7 region chain",
+  "sql_file": "sql/learning/02_region_nation.sql",
+  "setting": "default",
+  "graph": {
+    "nodes": [
+      {
+        "id": "r",
+        "table": "region",
+        "filter": "r_name = AMERICA"
+      },
+      {
+        "id": "n",
+        "table": "nation"
+      }
+    ],
+    "edges": [
+      {
+        "from": "r",
+        "to": "n",
+        "predicate": "r_regionkey = n_regionkey"
+      }
+    ]
+  },
+  "sql": "-- Two references still permit different loop orders and access methods.\nSELECT r.r_name, n.n_name\nFROM region AS r\nJOIN nation AS n ON n.n_regionkey = r.r_regionkey\nWHERE r.r_name = 'AMERICA';\n",
+  "trace": {
+    "schema_version": 1,
+    "blocks": [
+      {
+        "id": 0,
+        "start_line": 1,
+        "loops": {
+          "0": {
+            "table_position": 0,
+            "terms": 0,
+            "setup": 0,
+            "run": 39,
+            "rows": 3,
+            "self_mask": 1,
+            "prerequisite_mask": 0,
+            "flags": 8388864,
+            "id": "0",
+            "access": "r",
+            "alias": "r",
+            "equalities": null,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 25
+          },
+          "1": {
+            "table_position": 0,
+            "terms": 1,
+            "setup": 0,
+            "run": 24,
+            "rows": -1,
+            "self_mask": 1,
+            "prerequisite_mask": 2,
+            "flags": 8392961,
+            "id": "1",
+            "access": "r",
+            "alias": "r",
+            "equalities": null,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 9
+          },
+          "2": {
+            "table_position": 1,
+            "terms": 0,
+            "setup": 0,
+            "run": 62,
+            "rows": 46,
+            "self_mask": 2,
+            "prerequisite_mask": 0,
+            "flags": 256,
+            "id": "2",
+            "access": "n",
+            "alias": "n",
+            "equalities": null,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 10
+          },
+          "3": {
+            "table_position": 1,
+            "terms": 1,
+            "setup": 0,
+            "run": 48,
+            "rows": 23,
+            "self_mask": 2,
+            "prerequisite_mask": 1,
+            "flags": 66049,
+            "id": "3",
+            "access": "n.idx_nation_regionkey",
+            "alias": "n",
+            "equalities": 1,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 26
+          }
+        },
+        "passes": [
+          {
+            "id": 0,
+            "source_line": 12,
+            "row_estimate": 0,
+            "query_loop": 0,
+            "loops": {
+              "0": {
+                "table_position": 0,
+                "terms": 0,
+                "setup": 0,
+                "run": 39,
+                "rows": 3,
+                "self_mask": 1,
+                "prerequisite_mask": 0,
+                "flags": 8388864,
+                "id": "0",
+                "access": "r",
+                "alias": "r",
+                "equalities": null,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 8
+              },
+              "1": {
+                "table_position": 0,
+                "terms": 1,
+                "setup": 0,
+                "run": 24,
+                "rows": -1,
+                "self_mask": 1,
+                "prerequisite_mask": 2,
+                "flags": 8392961,
+                "id": "1",
+                "access": "r",
+                "alias": "r",
+                "equalities": null,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 9
+              },
+              "2": {
+                "table_position": 1,
+                "terms": 0,
+                "setup": 0,
+                "run": 62,
+                "rows": 46,
+                "self_mask": 2,
+                "prerequisite_mask": 0,
+                "flags": 256,
+                "id": "2",
+                "access": "n",
+                "alias": "n",
+                "equalities": null,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 10
+              },
+              "3": {
+                "table_position": 1,
+                "terms": 1,
+                "setup": 0,
+                "run": 48,
+                "rows": 23,
+                "self_mask": 2,
+                "prerequisite_mask": 1,
+                "flags": 66049,
+                "id": "3",
+                "access": "n.idx_nation_regionkey",
+                "alias": "n",
+                "equalities": 1,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 11
+              }
+            },
+            "rounds": [
+              {
+                "depth": 1,
+                "source_line": 15,
+                "events": [
+                  {
+                    "kind": "New",
+                    "path": "0",
+                    "cost": 40,
+                    "rows": 3,
+                    "unsorted_cost": 38,
+                    "order": "0",
+                    "source_line": 13,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "2",
+                    "cost": 62,
+                    "rows": 46,
+                    "unsorted_cost": 60,
+                    "order": "0",
+                    "source_line": 14,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  }
+                ],
+                "retained": [
+                  {
+                    "path": "0",
+                    "cost": 40,
+                    "rows": 3,
+                    "order": "0",
+                    "source_line": 16
+                  },
+                  {
+                    "path": "2",
+                    "cost": 62,
+                    "rows": 46,
+                    "order": "0",
+                    "source_line": 17
+                  }
+                ]
+              },
+              {
+                "depth": 2,
+                "source_line": 22,
+                "events": [
+                  {
+                    "kind": "New",
+                    "path": "02",
+                    "cost": 67,
+                    "rows": 49,
+                    "unsorted_cost": 65,
+                    "order": "0",
+                    "source_line": 18,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Update",
+                    "path": "03",
+                    "cost": 56,
+                    "rows": 26,
+                    "unsorted_cost": 54,
+                    "order": "0",
+                    "source_line": 19,
+                    "comparison": {
+                      "relation": "was",
+                      "path": "02",
+                      "cost": 67,
+                      "rows": 49,
+                      "unsorted_cost": 65,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "20",
+                    "cost": 87,
+                    "rows": 49,
+                    "unsorted_cost": 85,
+                    "order": "0",
+                    "source_line": 20,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "03",
+                      "cost": 56,
+                      "rows": 26,
+                      "unsorted_cost": 54,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "21",
+                    "cost": 76,
+                    "rows": 45,
+                    "unsorted_cost": 74,
+                    "order": "0",
+                    "source_line": 21,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "03",
+                      "cost": 56,
+                      "rows": 26,
+                      "unsorted_cost": 54,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  }
+                ],
+                "retained": [
+                  {
+                    "path": "03",
+                    "cost": 56,
+                    "rows": 26,
+                    "order": "0",
+                    "source_line": 23
+                  }
+                ]
+              }
+            ],
+            "path_limit": 5
+          }
+        ],
+        "access_events": [
+          {
+            "source_line": 2,
+            "raw": "    add: * 0.01.00            r                     f 004000 N 1 cost 63,45,43"
+          },
+          {
+            "source_line": 3,
+            "raw": "replace: * 0.01.00            r                     f 004000 N 1 cost 63,45,43"
+          },
+          {
+            "source_line": 4,
+            "raw": "   with: * 0.01.00            r                     f 800100 N 0 cost 0,39,3"
+          },
+          {
+            "source_line": 5,
+            "raw": "    add: * 0.01.02            r                     f 801101 N 1 cost 0,24,-1"
+          },
+          {
+            "source_line": 6,
+            "raw": "    add: * 1.02.00            n                     f 000100 N 0 cost 0,62,46"
+          },
+          {
+            "source_line": 7,
+            "raw": "    add: * 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23"
+          }
+        ],
+        "annotations": [],
+        "star_applied": false,
+        "solution": {
+          "cost": 56,
+          "rows": 26,
+          "source_line": 24,
+          "path": "03"
+        },
+        "solution_loops": [
+          {
+            "table_position": 0,
+            "terms": 0,
+            "setup": 0,
+            "run": 39,
+            "rows": 3,
+            "self_mask": 1,
+            "prerequisite_mask": 0,
+            "flags": 8388864,
+            "id": "0",
+            "access": "r",
+            "alias": "r",
+            "equalities": null,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 25
+          },
+          {
+            "table_position": 1,
+            "terms": 1,
+            "setup": 0,
+            "run": 48,
+            "rows": 23,
+            "self_mask": 2,
+            "prerequisite_mask": 1,
+            "flags": 66049,
+            "id": "3",
+            "access": "n.idx_nation_regionkey",
+            "alias": "n",
+            "equalities": 1,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 26
+          }
+        ],
+        "end_line": 27,
+        "table_count": 2,
+        "path_limit": 5,
+        "path_limit_basis": "Pinned wherePathSolver/computeMxChoice source and observed heuristic flag",
+        "event_counts": {
+          "New": 3,
+          "Update": 1,
+          "Skip": 2
+        }
+      }
+    ],
+    "eqp": [
+      "|--SCAN r",
+      "`--SEARCH n USING INDEX idx_nation_regionkey (n_regionkey=?)"
+    ],
+    "raw_lines": [
+      "*** Optimizer Start *** (wctrlFlags: 0x0)",
+      "    add: * 0.01.00            r                     f 004000 N 1 cost 63,45,43",
+      "replace: * 0.01.00            r                     f 004000 N 1 cost 63,45,43",
+      "   with: * 0.01.00            r                     f 800100 N 0 cost 0,39,3",
+      "    add: * 0.01.02            r                     f 801101 N 1 cost 0,24,-1",
+      "    add: * 1.02.00            n                     f 000100 N 0 cost 0,62,46",
+      "    add: * 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23",
+      "0 0.01.00            r                     f 800100 N 0 cost 0,39,3",
+      "1 0.01.02            r                     f 801101 N 1 cost 0,24,-1",
+      "2 1.02.00            n                     f 000100 N 0 cost 0,62,46",
+      "3 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23",
+      "---- begin solver.  (nRowEst=0, nQueryLoop=0)",
+      "New    0 cost=40 ,  3, 38 order=0",
+      "New    2 cost=62 , 46, 60 order=0",
+      "---- after round 0 ----",
+      " 0 cost=40  nrow=3   order=0",
+      " 2 cost=62  nrow=46  order=0",
+      "New    02 cost=67 , 49, 65 order=0",
+      "Update 03 cost=56 , 26, 54 order=0  was 02 cost=67 , 49, 65 order=0",
+      "Skip   20 cost=87 , 49, 85 order=0   vs 03 cost=56 , 26, 54 order=0",
+      "Skip   21 cost=76 , 45, 74 order=0   vs 03 cost=56 , 26, 54 order=0",
+      "---- after round 1 ----",
+      " 03 cost=56  nrow=26  order=0",
+      "---- Solution cost=56, nRow=26",
+      "0 0.01.00            r                     f 800100 N 0 cost 0,39,3",
+      "3 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23",
+      "*** Optimizer Finished ***",
+      "QUERY PLAN",
+      "|--SCAN r",
+      "`--SEARCH n USING INDEX idx_nation_regionkey (n_regionkey=?)"
+    ]
+  }
+}

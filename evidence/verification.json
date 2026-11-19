@@ -1,0 +1,36 @@
+{
+  "verified_utc": "2026-11-18T14:25:36.343584+00:00",
+  "python_unittest_cases_passed": 6,
+  "fresh_capture_runs_compared": 5,
+  "browser": {
+    "runs": 5,
+    "passes": 7,
+    "rounds": 41,
+    "checks": [
+      "navigation",
+      "alias graph mapping",
+      "keyboard selection",
+      "candidate filtering",
+      "raw evidence inspection",
+      "invalid import rejection",
+      "valid import",
+      "mobile layout",
+      "zero HTTP requests"
+    ]
+  },
+  "gdb": {
+    "sessions": 3,
+    "solver_stops": 5,
+    "replacement_02_to_04_observed": true
+  },
+  "report": {
+    "pages": 13,
+    "all_pages_visually_reviewed": true,
+    "rendered_with": "Bundled Documents skill renderer and LibreOffice",
+    "final_figures_match_docx": true,
+    "pdf_sha256": "832f318e7820ab90cc22d6eb52d8e986d1506ae7a2e48b25f372edf56dbe0c25"
+  },
+  "database_unchanged_during_capture": true,
+  "sqlite_source_and_existing_build_modified": false,
+  "student_understanding_and_rehearsal": "Not evaluated; follow docs/study_guide.md"
+}

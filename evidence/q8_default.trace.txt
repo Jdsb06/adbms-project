@@ -1,0 +1,1179 @@
+*** Optimizer Start *** (wctrlFlags: 0x240)
+    add: * 0.001.000         part                     f 800100 N 0 cost 0,192,156
+    add: * 0.001.004         part                     f 801101 N 1 cost 0,44,-1
+replace: * 0.001.000         part                     f 800100 N 0 cost 0,192,156
+   with: * 0.001.000         part.idx_part_type     0 f 800240 N 0 cost 0,187,156
+replace: * 0.001.000         part.idx_part_type     0 f 800240 N 0 cost 0,187,156
+   with: * 0.001.000         part.idx_part_type     1 f 810241 N 1 cost 0,114,103
+   skip: * 0.001.004         part.idx_part_type     2 f 811241 N 2 cost 0,44,0
+    add: * 1.002.000     supplier                     f 000100 N 0 cost 0,148,132
+    add: * 1.002.004     supplier                     f 001101 N 1 cost 0,40,0
+replace: * 1.002.000     supplier                     f 000100 N 0 cost 0,148,132
+   with: * 1.002.000     supplier.idx_supplier_nationkey  0 f 000240 N 0 cost 0,138,132
+    add: * 1.002.040     supplier.idx_supplier_nationkey  1 f 010241 N 1 cost 0,92,86
+    add: * 1.002.044     supplier.idx_supplier_nationkey  2 f 011241 N 2 cost 0,39,0
+    add: * 2.004.000     lineitem                     f 000100 N 0 cost 0,241,225
+    add: * 2.004.002     lineitem.idx_lineitem_suppkey  1 f 010201 N 1 cost 0,114,92
+    add: * 2.004.001     lineitem.idx_lineitem_partkey  1 f 010201 N 1 cost 0,74,49
+    add: * 2.004.008     lineitem._1                1 f 000201 N 1 cost 0,56,23
+    add: * 3.008.000       orders                     f 800100 N 0 cost 0,221,204
+    add: * 3.008.004       orders                     f 801101 N 1 cost 0,45,-1
+replace: * 3.008.000       orders                     f 800100 N 0 cost 0,221,204
+   with: * 3.008.000       orders.idx_orders_orderdate  0 f 000222 N 1 cost 0,207,185
+replace: * 3.008.000       orders.idx_orders_orderdate  0 f 000222 N 1 cost 0,207,185
+   with: * 3.008.000       orders.idx_orders_orderdate  0 f 000232 N 2 cost 0,167,145
+   skip: * 3.008.000       orders.idx_orders_orderdate  0 f 000212 N 1 cost 0,207,185
+    add: * 3.008.010       orders.idx_orders_custkey  1 f 810201 N 1 cost 0,66,39
+   skip: * 3.008.014       orders.idx_orders_custkey  2 f 811201 N 2 cost 0,46,-1
+    add: * 4.010.000     customer                     f 000100 N 0 cost 0,188,172
+    add: * 4.010.008     customer                     f 001101 N 1 cost 0,43,0
+replace: * 4.010.000     customer                     f 000100 N 0 cost 0,188,172
+   with: * 4.010.000     customer.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172
+    add: * 4.010.020     customer.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125
+    add: * 4.010.028     customer.idx_customer_nationkey  2 f 011241 N 2 cost 0,41,0
+    add: * 5.020.000           n1                     f 000100 N 0 cost 0,62,46
+    add: * 5.020.010           n1                     f 001101 N 1 cost 0,29,0
+replace: * 5.020.000           n1                     f 000100 N 0 cost 0,62,46
+   with: * 5.020.000           n1.idx_nation_regionkey  0 f 000240 N 0 cost 0,52,46
+    add: * 5.020.080           n1.idx_nation_regionkey  1 f 010241 N 1 cost 0,36,23
+    add: * 5.020.090           n1.idx_nation_regionkey  2 f 011241 N 2 cost 0,26,0
+    add: * 6.040.000           n2                     f 000100 N 0 cost 0,62,46
+    add: * 6.040.002           n2                     f 001101 N 1 cost 0,29,0
+    add: * 7.080.000       region                     f 004000 N 1 cost 63,45,43
+replace: * 7.080.000       region                     f 004000 N 1 cost 63,45,43
+   with: * 7.080.000       region                     f 800100 N 0 cost 0,39,3
+    add: * 7.080.020       region                     f 801101 N 1 cost 0,24,-1
+0 0.001.000         part.idx_part_type     1 f 810241 N 1 cost 0,114,103
+1 0.001.004         part                     f 801101 N 1 cost 0,44,-1
+2 1.002.000     supplier.idx_supplier_nationkey  0 f 000240 N 0 cost 0,138,132
+3 1.002.004     supplier                     f 001101 N 1 cost 0,40,0
+4 1.002.040     supplier.idx_supplier_nationkey  1 f 010241 N 1 cost 0,92,86
+5 1.002.044     supplier.idx_supplier_nationkey  2 f 011241 N 2 cost 0,39,0
+6 2.004.000     lineitem                     f 000100 N 0 cost 0,241,225
+7 2.004.002     lineitem.idx_lineitem_suppkey  1 f 010201 N 1 cost 0,114,92
+8 2.004.001     lineitem.idx_lineitem_partkey  1 f 010201 N 1 cost 0,74,49
+9 2.004.008     lineitem._1                1 f 000201 N 1 cost 0,56,23
+a 3.008.000       orders.idx_orders_orderdate  0 f 000232 N 2 cost 0,167,145
+b 3.008.004       orders                     f 801101 N 1 cost 0,45,-1
+c 3.008.010       orders.idx_orders_custkey  1 f 810201 N 1 cost 0,66,39
+d 4.010.000     customer.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172
+e 4.010.008     customer                     f 001101 N 1 cost 0,43,0
+f 4.010.020     customer.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125
+g 4.010.028     customer.idx_customer_nationkey  2 f 011241 N 2 cost 0,41,0
+h 5.020.000           n1.idx_nation_regionkey  0 f 000240 N 0 cost 0,52,46
+i 5.020.010           n1                     f 001101 N 1 cost 0,29,0
+j 5.020.080           n1.idx_nation_regionkey  1 f 010241 N 1 cost 0,36,23
+k 5.020.090           n1.idx_nation_regionkey  2 f 011241 N 2 cost 0,26,0
+l 6.040.000           n2                     f 000100 N 0 cost 0,62,46
+m 6.040.002           n2                     f 001101 N 1 cost 0,29,0
+n 7.080.000       region                     f 800100 N 0 cost 0,39,3
+o 7.080.020       region                     f 801101 N 1 cost 0,24,-1
+---- begin solver.  (nRowEst=0, nQueryLoop=0)
+Fact table lineitem(2), dimensions: part(0) supplier(1) orders(3)
+Increase SCAN cost of supplier to 242
+WhereLoops changed by star-query heuristic:
+2 1.002.000     supplier.idx_supplier_nationkey  0 f 000240 N 0 cost 0,242,132 delta=104
+New    0 cost=114,103,112 order=0
+New    2 cost=242,132,240 order=0
+New    6 cost=241,225,239 order=0
+New    a cost=167,145,165 order=0
+New    d cost=178,172,176 order=0
+New    h cost=52 , 46, 50 order=0
+New    l cost=62 , 46, 60 order=0
+New    n cost=40 ,  3, 38 order=0
+---- after round 0 ----
+ n cost=40  nrow=3   order=0
+ h cost=52  nrow=46  order=0
+ l cost=62  nrow=46  order=0
+ 0 cost=114 nrow=103 order=0
+ a cost=167 nrow=145 order=0
+ d cost=178 nrow=172 order=0
+ 6 cost=241 nrow=225 order=0
+ 2 cost=242 nrow=132 order=0
+New    02 cost=345,235,343 order=0
+New    06 cost=344,328,342 order=0
+Update 08 cost=177,152,175 order=0  was 06 cost=344,328,342 order=0
+New    0a cost=270,248,268 order=0
+New    0d cost=281,275,279 order=0
+New    0h cost=156,149,154 order=0
+New    0l cost=165,149,163 order=0
+New    0n cost=144,106,142 order=0
+Update 20 cost=253,235,251 order=0  was 02 cost=345,235,343 order=0
+New    26 cost=373,357,371 order=0
+Update 27 cost=253,224,251 order=0  was 26 cost=373,357,371 order=0
+New    2a cost=299,277,297 order=0
+New    2d cost=310,304,308 order=0
+New    2h cost=240,178,238 order=0
+New    2l cost=241,178,239 order=0
+Update 2m cost=240,132,238 order=0  was 2l cost=241,178,239 order=0
+New    2n cost=240,135,238 order=0
+Skip   60 cost=339,328,337 order=0   vs 08 cost=177,152,175 order=0
+Skip   61 cost=271,224,269 order=0   vs 08 cost=177,152,175 order=0
+Skip   62 cost=467,357,465 order=0   vs 27 cost=253,224,251 order=0
+Skip   63 cost=267,225,265 order=0   vs 27 cost=253,224,251 order=0
+New    6a cost=392,370,390 order=0
+Update 6b cost=272,224,270 order=0  was 6a cost=392,370,390 order=0
+New    6d cost=403,397,401 order=0
+New    6h cost=278,271,276 order=0
+New    6l cost=288,271,286 order=0
+New    6n cost=266,228,264 order=0
+Update a0 cost=259,248,257 order=0  was 0a cost=270,248,268 order=0
+Skip   a2 cost=387,277,385 order=0   vs 2a cost=299,277,297 order=0
+Skip   a6 cost=386,370,384 order=0   vs 6b cost=272,224,270 order=0
+Update a9 cost=202,168,200 order=0  was 6b cost=272,224,270 order=0
+New    ad cost=323,317,321 order=0
+Update ae cost=191,145,189 order=0  was ad cost=323,317,321 order=0
+New    ah cost=198,191,196 order=0
+New    al cost=208,191,206 order=0
+New    an cost=187,148,185 order=0
+Skip   d0 cost=286,275,284 order=0   vs 0d cost=281,275,279 order=0
+Skip   d2 cost=414,304,412 order=0
+Skip   d6 cost=413,397,411 order=0
+Skip   da cost=339,317,337 order=0   vs ae cost=191,145,189 order=0
+Skip   dc cost=238,211,236 order=0   vs ae cost=191,145,189 order=0
+New    dh cost=225,218,223 order=0
+Update di cost=203,172,201 order=0  was dh cost=225,218,223 order=0
+New    dl cost=234,218,232 order=0
+New    dn cost=212,175,210 order=0
+Skip   h0 cost=160,149,158 order=0   vs 0h cost=156,149,154 order=0
+Skip   h2 cost=288,178,286 order=0   vs 2h cost=240,178,238 order=0
+Skip   h6 cost=287,271,285 order=0
+Skip   ha cost=213,191,211 order=0   vs ah cost=198,191,196 order=0
+Skip   hd cost=224,218,222 order=0   vs di cost=203,172,201 order=0
+Update hf cost=177,171,175 order=0  was di cost=203,172,201 order=0
+New    hl cost=108, 92,106 order=0
+New    hn cost=86 , 49, 84 order=0
+Update ho cost=73 , 45, 71 order=0  was hn cost=86 , 49, 84 order=0
+Update l0 cost=160,149,158 order=0  was 0l cost=165,149,163 order=0
+Skip   l2 cost=288,178,286 order=0   vs 2m cost=240,132,238 order=0
+Update l4 cost=138,132,136 order=0  was 2m cost=240,132,238 order=0
+Skip   l6 cost=287,271,285 order=0
+Skip   la cost=213,191,211 order=0   vs al cost=208,191,206 order=0
+Update ld cost=224,218,222 order=0  was dl cost=234,218,232 order=0
+Update lh cost=99 , 92, 97 order=0  was hl cost=108, 92,106 order=0
+New    ln cost=87 , 49, 85 order=0
+Update n0 cost=117,106,115 order=0  was 0n cost=144,106,142 order=0
+Skip   n2 cost=245,135,243 order=0   vs 2n cost=240,135,238 order=0
+Skip   n6 cost=244,228,242 order=0
+Update na cost=170,148,168 order=0  was an cost=187,148,185 order=0
+Update nd cost=181,175,179 order=0  was dn cost=212,175,210 order=0
+Update nh cost=59 , 49, 57 order=0  was ho cost=73 , 45, 71 order=0
+Update nj cost=49 , 26, 47 order=0  was nh cost=59 , 49, 57 order=0
+Update nl cost=67 , 49, 65 order=0  was ln cost=87 , 49, 85 order=0
+---- after round 1 ----
+ nj cost=49  nrow=26  order=0
+ nl cost=67  nrow=49  order=0
+ lh cost=99  nrow=92  order=0
+ n0 cost=117 nrow=106 order=0
+ l4 cost=138 nrow=132 order=0
+ 0h cost=156 nrow=149 order=0
+ l0 cost=160 nrow=149 order=0
+ na cost=170 nrow=148 order=0
+ 08 cost=177 nrow=152 order=0
+ hf cost=177 nrow=171 order=0
+ nd cost=181 nrow=175 order=0
+ ae cost=191 nrow=145 order=0
+ ah cost=198 nrow=191 order=0
+ a9 cost=202 nrow=168 order=0
+ al cost=208 nrow=191 order=0
+ ld cost=224 nrow=218 order=0
+ 2h cost=240 nrow=178 order=0
+ 2n cost=240 nrow=135 order=0
+New    nl0 cost=163,152,161 order=0
+New    nl2 cost=291,181,289 order=0
+Update nl4 cost=141,135,139 order=0  was nl2 cost=291,181,289 order=0
+New    nl6 cost=290,274,288 order=0
+New    nla cost=216,194,214 order=0
+New    nld cost=227,221,225 order=0
+New    nlh cost=102, 95,100 order=0
+Update nlj cost=88 , 72, 86 order=0  was nlh cost=102, 95,100 order=0
+New    082 cost=394,284,392 order=0
+Update 083 cost=196,152,194 order=0  was 082 cost=394,284,392 order=0
+New    08a cost=319,297,317 order=0
+Update 08b cost=200,151,198 order=0  was 08a cost=319,297,317 order=0
+New    08d cost=330,324,328 order=0
+New    08h cost=206,198,204 order=0
+New    08l cost=215,198,213 order=0
+New    08n cost=195,155,193 order=0
+New    lh0 cost=206,195,204 order=0
+New    lh2 cost=334,224,332 order=0
+Update lh4 cost=184,178,182 order=0  was lh2 cost=334,224,332 order=0
+New    lh6 cost=333,317,331 order=0
+New    lha cost=259,237,257 order=0
+New    lhd cost=270,264,268 order=0
+Update lhf cost=223,217,221 order=0  was lhd cost=270,264,268 order=0
+Skip   lhn cost=132, 95,130 order=0   vs nlj cost=88 , 72, 86 order=0
+Skip   lho cost=119, 91,117 order=0   vs nlj cost=88 , 72, 86 order=0
+New    hf0 cost=285,274,283 order=0
+Skip   hf2 cost=413,303,411 order=0
+Skip   hf6 cost=412,396,410 order=0
+Skip   hfa cost=338,316,336 order=0
+New    hfc cost=237,210,235 order=0
+Skip   hfl cost=233,217,231 order=0   vs lhf cost=223,217,221 order=0
+New    hfn cost=211,174,209 order=0
+Update hfo cost=198,170,196 order=0  was hfn cost=211,174,209 order=0
+Skip   0h2 cost=391,281,389 order=0
+Skip   0h6 cost=390,374,388 order=0   vs 08h cost=206,198,204 order=0
+Skip   0h8 cost=223,198,221 order=0   vs 08h cost=206,198,204 order=0
+Skip   0ha cost=316,294,314 order=0
+Skip   0hd cost=327,321,325 order=0   vs hf0 cost=285,274,283 order=0
+Update 0hf cost=280,274,278 order=0  was hf0 cost=285,274,283 order=0
+Skip   0hl cost=211,195,209 order=0   vs lh0 cost=206,195,204 order=0
+New    0hn cost=189,152,187 order=0
+Update 0ho cost=176,148,174 order=0  was 0hn cost=189,152,187 order=0
+Skip   l02 cost=391,281,389 order=0
+New    l04 cost=241,235,239 order=0
+Skip   l06 cost=390,374,388 order=0   vs 08l cost=215,198,213 order=0
+Skip   l08 cost=223,198,221 order=0   vs 08l cost=215,198,213 order=0
+Skip   l0a cost=316,294,314 order=0
+Skip   l0d cost=327,321,325 order=0
+Update l0h cost=202,195,200 order=0  was lh0 cost=206,195,204 order=0
+Skip   l0n cost=190,152,188 order=0   vs nl0 cost=163,152,161 order=0
+Skip   n02 cost=348,238,346 order=0
+Skip   n06 cost=347,331,345 order=0   vs 08n cost=195,155,193 order=0
+Update n08 cost=180,155,178 order=0  was 08n cost=195,155,193 order=0
+Skip   n0a cost=273,251,271 order=0
+Skip   n0d cost=284,278,282 order=0
+Update n0h cost=159,152,157 order=0  was 0ho cost=176,148,174 order=0
+Update n0j cost=144,129,142 order=0  was n0h cost=159,152,157 order=0
+Skip   n0l cost=168,152,166 order=0   vs nl0 cost=163,152,161 order=0
+Update nj0 cost=140,129,138 order=0  was n0j cost=144,129,142 order=0
+Skip   nj2 cost=268,158,266 order=0
+Skip   nj6 cost=267,251,265 order=0
+New    nja cost=193,171,191 order=0
+Skip   njd cost=204,198,202 order=0   vs hfo cost=198,170,196 order=0
+Update njf cost=157,151,155 order=0  was hfo cost=198,170,196 order=0
+Skip   njl cost=89 , 72, 87 order=0   vs nlj cost=88 , 72, 86 order=0
+Skip   al0 cost=305,294,303 order=0
+Skip   al2 cost=433,323,431 order=0
+Skip   al4 cost=283,277,281 order=0
+Skip   al6 cost=432,416,430 order=0
+Skip   al9 cost=248,214,246 order=0
+Skip   ald cost=369,363,367 order=0
+New    ale cost=236,191,234 order=0
+Skip   alh cost=244,237,242 order=0
+Skip   aln cost=233,194,231 order=0   vs nla cost=216,194,214 order=0
+Skip   ah0 cost=305,294,303 order=0
+Skip   ah2 cost=433,323,431 order=0
+Skip   ah6 cost=432,416,430 order=0
+Skip   ah9 cost=247,214,245 order=0
+Skip   ahd cost=369,363,367 order=0   vs hfc cost=237,210,235 order=0
+Update ahe cost=235,191,233 order=0  was hfc cost=237,210,235 order=0
+Skip   ahf cost=322,316,320 order=0   vs ahe cost=235,191,233 order=0
+Update ahg cost=233,191,231 order=0  was ahe cost=235,191,233 order=0
+Skip   ahl cost=253,237,251 order=0
+Skip   ahn cost=231,194,229 order=0   vs nja cost=193,171,191 order=0
+Skip   aho cost=218,190,216 order=0   vs nja cost=193,171,191 order=0
+Skip   2h0 cost=292,281,290 order=0
+Skip   2h6 cost=419,403,417 order=0
+Skip   2h7 cost=292,270,290 order=0
+Skip   2ha cost=345,323,343 order=0
+Skip   2hd cost=356,350,354 order=0
+Skip   2hf cost=309,303,307 order=0
+Skip   2hl cost=249,224,247 order=0   vs lh4 cost=184,178,182 order=0
+Skip   2hm cost=240,178,238 order=0   vs lh4 cost=184,178,182 order=0
+Skip   2hn cost=241,181,239 order=0
+Skip   2ho cost=239,177,237 order=0
+Skip   l40 cost=246,235,244 order=0
+Skip   l46 cost=373,357,371 order=0
+Skip   l47 cost=246,224,244 order=0
+Skip   l4a cost=299,277,297 order=0
+Skip   l4d cost=310,304,308 order=0
+Skip   l4h cost=185,178,183 order=0   vs lh4 cost=184,178,182 order=0
+Skip   l4n cost=172,135,170 order=0   vs nl4 cost=141,135,139 order=0
+Skip   2n0 cost=255,238,253 order=0
+Skip   2n6 cost=376,360,374 order=0
+Skip   2n7 cost=255,227,253 order=0
+Skip   2na cost=302,280,300 order=0
+Skip   2nd cost=313,307,311 order=0
+Skip   2nh cost=238,181,236 order=0
+Skip   2nj cost=238,158,236 order=0
+Skip   2nl cost=239,181,237 order=0   vs nl4 cost=141,135,139 order=0
+Skip   2nm cost=238,135,236 order=0   vs nl4 cost=141,135,139 order=0
+Skip   a90 cost=282,271,280 order=0   vs 08b cost=200,151,198 order=0
+Skip   a91 cost=217,167,215 order=0   vs 08b cost=200,151,198 order=0
+Skip   a92 cost=410,300,408 order=0
+New    a93 cost=215,168,213 order=0
+Skip   a9d cost=346,340,344 order=0
+New    a9e cost=217,168,215 order=0
+New    a9h cost=223,214,221 order=0
+Skip   a9l cost=232,214,230 order=0
+New    a9n cost=214,171,212 order=0
+Skip   ae0 cost=259,248,257 order=0
+Skip   ae2 cost=387,277,385 order=0
+Skip   ae6 cost=386,370,384 order=0   vs a9e cost=217,168,215 order=0
+Update ae9 cost=206,168,204 order=0  was a9e cost=217,168,215 order=0
+New    aeh cost=204,191,202 order=0
+Update aei cost=193,145,191 order=0  was aeh cost=204,191,202 order=0
+New    ael cost=211,191,209 order=0
+New    aen cost=197,148,195 order=0
+Skip   ld0 cost=332,321,330 order=0
+Skip   ld2 cost=460,350,458 order=0
+Skip   ld4 cost=310,304,308 order=0
+Skip   ld6 cost=459,443,457 order=0
+Skip   lda cost=385,363,383 order=0   vs ael cost=211,191,209 order=0
+Skip   ldc cost=284,257,282 order=0   vs ael cost=211,191,209 order=0
+Skip   ldh cost=271,264,269 order=0
+Skip   ldi cost=249,218,247 order=0
+Skip   ldn cost=258,221,256 order=0
+Skip   na0 cost=262,251,260 order=0
+Skip   na2 cost=390,280,388 order=0
+Skip   na6 cost=389,373,387 order=0   vs a9n cost=214,171,212 order=0
+Update na9 cost=205,171,203 order=0  was a9n cost=214,171,212 order=0
+Skip   nad cost=326,320,324 order=0   vs aen cost=197,148,195 order=0
+Update nae cost=194,148,192 order=0  was aen cost=197,148,195 order=0
+Skip   nah cost=201,194,199 order=0   vs nja cost=193,171,191 order=0
+Update naj cost=188,171,186 order=0  was nja cost=193,171,191 order=0
+New    nal cost=211,194,209 order=0
+Skip   nd0 cost=289,278,287 order=0
+Skip   nd2 cost=417,307,415 order=0
+Skip   nd6 cost=416,400,414 order=0
+Skip   nda cost=342,320,340 order=0   vs nae cost=194,148,192 order=0
+Skip   ndc cost=241,214,239 order=0   vs nae cost=194,148,192 order=0
+Skip   ndh cost=228,221,226 order=0   vs njf cost=157,151,155 order=0
+Skip   ndi cost=206,175,204 order=0   vs njf cost=157,151,155 order=0
+Skip   ndj cost=212,198,210 order=0   vs njf cost=157,151,155 order=0
+Skip   ndk cost=204,175,202 order=0   vs njf cost=157,151,155 order=0
+Skip   ndl cost=237,221,235 order=0
+---- after round 2 ----
+ nlj cost=88  nrow=72  order=0
+ nj0 cost=140 nrow=129 order=0
+ nl4 cost=141 nrow=135 order=0
+ njf cost=157 nrow=151 order=0
+ nl0 cost=163 nrow=152 order=0
+ n08 cost=180 nrow=155 order=0
+ lh4 cost=184 nrow=178 order=0
+ naj cost=188 nrow=171 order=0
+ aei cost=193 nrow=145 order=0
+ nae cost=194 nrow=148 order=0
+ 083 cost=196 nrow=152 order=0
+ 08b cost=200 nrow=151 order=0
+ l0h cost=202 nrow=195 order=0
+ na9 cost=205 nrow=171 order=0
+ 08h cost=206 nrow=198 order=0
+ ae9 cost=206 nrow=168 order=0
+ ael cost=211 nrow=191 order=0
+ nal cost=211 nrow=194 order=0
+New    nl02 cost=394,284,392 order=0
+Update nl04 cost=244,238,242 order=0  was nl02 cost=394,284,392 order=0
+New    nl06 cost=393,377,391 order=0
+Update nl08 cost=226,201,224 order=0  was nl06 cost=393,377,391 order=0
+New    nl0a cost=319,297,317 order=0
+New    nl0d cost=330,324,328 order=0
+New    nl0h cost=205,198,203 order=0
+Update nl0j cost=190,175,188 order=0  was nl0h cost=205,198,203 order=0
+Skip   nl40 cost=249,238,247 order=0   vs nl04 cost=244,238,242 order=0
+New    nl46 cost=376,360,374 order=0
+Update nl47 cost=249,227,247 order=0  was nl46 cost=376,360,374 order=0
+New    nl4a cost=302,280,300 order=0
+New    nl4d cost=313,307,311 order=0
+New    nl4h cost=188,181,186 order=0
+Update nl4j cost=172,158,170 order=0  was nl4h cost=188,181,186 order=0
+New    nj02 cost=371,261,369 order=0
+New    nj06 cost=370,354,368 order=0
+Update nj08 cost=203,178,201 order=0  was nj06 cost=370,354,368 order=0
+New    nj0a cost=296,274,294 order=0
+New    nj0d cost=307,301,305 order=0
+Update nj0f cost=260,254,258 order=0  was nj0d cost=307,301,305 order=0
+Skip   nj0l cost=191,175,189 order=0   vs nl0j cost=190,175,188 order=0
+New    ael0 cost=305,294,303 order=0
+New    ael2 cost=433,323,431 order=0
+Update ael4 cost=283,277,281 order=0  was ael2 cost=433,323,431 order=0
+New    ael6 cost=432,416,430 order=0
+Update ael9 cost=248,214,246 order=0  was ael6 cost=432,416,430 order=0
+New    aelh cost=244,237,242 order=0
+Update aeli cost=226,191,224 order=0  was aelh cost=244,237,242 order=0
+New    aeln cost=233,194,231 order=0
+New    na90 cost=285,274,283 order=0
+Update na91 cost=220,170,218 order=0  was na90 cost=285,274,283 order=0
+Skip   na92 cost=413,303,411 order=0
+New    na93 cost=218,171,216 order=0
+Skip   na9d cost=349,343,347 order=0
+New    na9e cost=220,171,218 order=0
+New    na9h cost=226,217,224 order=0
+Update na9j cost=215,194,213 order=0  was na9h cost=226,217,224 order=0
+New    na9l cost=235,217,233 order=0
+Update nlj0 cost=186,175,184 order=0  was nl0j cost=190,175,188 order=0
+Skip   nlj2 cost=314,204,312 order=0   vs nl4j cost=172,158,170 order=0
+Update nlj4 cost=164,158,162 order=0  was nl4j cost=172,158,170 order=0
+Skip   nlj6 cost=313,297,311 order=0
+New    nlja cost=239,217,237 order=0
+New    nljd cost=250,244,248 order=0
+Update nljf cost=203,197,201 order=0  was nljd cost=250,244,248 order=0
+Skip   083a cost=319,297,317 order=0
+New    083b cost=206,151,204 order=0
+Skip   083d cost=330,324,328 order=0
+New    083h cost=210,198,208 order=0
+New    083l cost=217,198,215 order=0
+Update 083m cost=199,152,197 order=0  was 083l cost=217,198,215 order=0
+New    083n cost=203,155,201 order=0
+Skip   08b2 cost=393,283,391 order=0   vs 083b cost=206,151,204 order=0
+Update 08b3 cost=205,151,203 order=0  was 083b cost=206,151,204 order=0
+Skip   08bd cost=329,323,327 order=0
+New    08be cost=206,151,204 order=0
+New    08bh cost=211,197,209 order=0
+New    08bl cost=217,197,215 order=0
+Update 08bn cost=205,154,203 order=0  was na91 cost=220,170,218 order=0
+Skip   njf0 cost=265,254,263 order=0
+Skip   njf2 cost=393,283,391 order=0
+Skip   njf6 cost=392,376,390 order=0
+Skip   njfa cost=318,296,316 order=0
+New    njfc cost=217,190,215 order=0
+Skip   njfl cost=213,197,211 order=0   vs nljf cost=203,197,201 order=0
+Skip   08h2 cost=440,330,438 order=0   vs 083h cost=210,198,208 order=0
+Skip   08h3 cost=239,198,237 order=0   vs 083h cost=210,198,208 order=0
+Skip   08ha cost=365,343,363 order=0   vs 08bh cost=211,197,209 order=0
+Skip   08hb cost=244,197,242 order=0   vs 08bh cost=211,197,209 order=0
+Skip   08hd cost=376,370,374 order=0
+Skip   08hf cost=329,323,327 order=0
+Skip   08hl cost=260,244,258 order=0
+Skip   08hn cost=238,201,236 order=0   vs nj08 cost=203,178,201 order=0
+Skip   08ho cost=226,197,224 order=0   vs nj08 cost=203,178,201 order=0
+Skip   nae0 cost=262,251,260 order=0
+Skip   nae2 cost=390,280,388 order=0
+Skip   nae6 cost=389,373,387 order=0   vs na9e cost=220,171,218 order=0
+Update nae9 cost=209,171,207 order=0  was na9e cost=220,171,218 order=0
+Update naeh cost=207,194,205 order=0  was njfc cost=217,190,215 order=0
+Update naei cost=196,148,194 order=0  was naeh cost=207,194,205 order=0
+Skip   naej cost=199,171,197 order=0   vs naei cost=196,148,194 order=0
+Skip   naek cost=196,148,194 order=0   vs naei cost=196,148,194 order=0
+New    nael cost=214,194,212 order=0
+Skip   n082 cost=397,287,395 order=0   vs 083n cost=203,155,201 order=0
+Update n083 cost=199,155,197 order=0  was 083n cost=203,155,201 order=0
+Skip   n08a cost=322,300,320 order=0   vs 08bn cost=205,154,203 order=0
+Update n08b cost=203,154,201 order=0  was 08bn cost=205,154,203 order=0
+Skip   n08d cost=333,327,331 order=0
+Skip   n08h cost=209,201,207 order=0   vs nj08 cost=203,178,201 order=0
+Update n08j cost=196,178,194 order=0  was nj08 cost=203,178,201 order=0
+New    n08l cost=218,201,216 order=0
+Skip   l0h2 cost=437,327,435 order=0
+Skip   l0h4 cost=287,281,285 order=0
+Skip   l0h6 cost=436,420,434 order=0
+Skip   l0h8 cost=269,244,267 order=0
+Skip   l0ha cost=362,340,360 order=0
+Skip   l0hd cost=373,367,371 order=0
+Skip   l0hf cost=326,320,324 order=0
+Skip   l0hn cost=235,198,233 order=0   vs nlj0 cost=186,175,184 order=0
+Skip   l0ho cost=222,194,220 order=0   vs nlj0 cost=186,175,184 order=0
+Skip   lh40 cost=292,281,290 order=0
+Skip   lh46 cost=419,403,417 order=0
+Skip   lh47 cost=292,270,290 order=0
+Skip   lh4a cost=345,323,343 order=0
+Skip   lh4d cost=356,350,354 order=0
+Skip   lh4f cost=309,303,307 order=0
+Skip   lh4n cost=218,181,216 order=0   vs nlj4 cost=164,158,162 order=0
+Skip   lh4o cost=205,177,203 order=0   vs nlj4 cost=164,158,162 order=0
+Skip   ae90 cost=282,271,280 order=0   vs 08be cost=206,151,204 order=0
+Skip   ae91 cost=219,167,217 order=0   vs 08be cost=206,151,204 order=0
+Skip   ae92 cost=410,300,408 order=0
+New    ae93 cost=216,168,214 order=0
+Skip   ae9h cost=224,214,222 order=0
+New    ae9i cost=211,168,209 order=0
+Skip   ae9l cost=232,214,230 order=0
+Skip   ae9n cost=216,171,214 order=0   vs nae9 cost=209,171,207 order=0
+Skip   naj0 cost=285,274,283 order=0
+Skip   naj2 cost=413,303,411 order=0
+Skip   naj6 cost=412,396,410 order=0   vs na9j cost=215,194,213 order=0
+Skip   naj9 cost=228,194,226 order=0   vs na9j cost=215,194,213 order=0
+Skip   najd cost=349,343,347 order=0   vs naei cost=196,148,194 order=0
+Skip   naje cost=216,171,214 order=0   vs naei cost=196,148,194 order=0
+Skip   najf cost=302,296,300 order=0   vs naei cost=196,148,194 order=0
+Skip   najg cost=214,171,212 order=0   vs naei cost=196,148,194 order=0
+Skip   najl cost=234,217,232 order=0
+Skip   aei0 cost=259,248,257 order=0
+Skip   aei2 cost=387,277,385 order=0
+Skip   aei6 cost=386,370,384 order=0   vs ae9i cost=211,168,209 order=0
+Update aei9 cost=207,168,205 order=0  was ae9i cost=211,168,209 order=0
+New    aeil cost=211,191,209 order=0
+Skip   aein cost=198,148,196 order=0   vs naei cost=196,148,194 order=0
+Update aeio cost=194,144,192 order=0  was naei cost=196,148,194 order=0
+Skip   nal0 cost=308,297,306 order=0
+Skip   nal2 cost=436,326,434 order=0
+Skip   nal4 cost=286,280,284 order=0
+Skip   nal6 cost=435,419,433 order=0
+Skip   nal9 cost=251,217,249 order=0
+Skip   nald cost=372,366,370 order=0   vs nael cost=214,194,212 order=0
+Skip   nale cost=239,194,237 order=0   vs nael cost=214,194,212 order=0
+Skip   nalh cost=247,240,245 order=0
+Skip   nalj cost=233,217,231 order=0
+---- after round 3 ----
+ nlj4 cost=164 nrow=158 order=0
+ nlj0 cost=186 nrow=175 order=0
+ aeio cost=194 nrow=144 order=0
+ n08j cost=196 nrow=178 order=0
+ 083m cost=199 nrow=152 order=0
+ n083 cost=199 nrow=155 order=0
+ n08b cost=203 nrow=154 order=0
+ nljf cost=203 nrow=197 order=0
+ 08b3 cost=205 nrow=151 order=0
+ 08be cost=206 nrow=151 order=0
+ aei9 cost=207 nrow=168 order=0
+ nae9 cost=209 nrow=171 order=0
+ 083h cost=210 nrow=198 order=0
+ 08bh cost=211 nrow=197 order=0
+ aeil cost=211 nrow=191 order=0
+ nael cost=214 nrow=194 order=0
+ na9j cost=215 nrow=194 order=0
+ ae93 cost=216 nrow=168 order=0
+New    08be2 cost=393,283,391 order=0
+Update 08be3 cost=209,151,207 order=0  was 08be2 cost=393,283,391 order=0
+New    08beh cost=214,197,212 order=0
+Update 08bei cost=207,151,205 order=0  was 08beh cost=214,197,212 order=0
+New    08bel cost=219,197,217 order=0
+New    08ben cost=209,154,207 order=0
+New    nael0 cost=308,297,306 order=0
+New    nael2 cost=436,326,434 order=0
+Update nael4 cost=286,280,284 order=0  was nael2 cost=436,326,434 order=0
+New    nael6 cost=435,419,433 order=0
+Update nael9 cost=251,217,249 order=0  was nael6 cost=435,419,433 order=0
+New    naelh cost=247,240,245 order=0
+Update naeli cost=229,194,227 order=0  was naelh cost=247,240,245 order=0
+Skip   naelj cost=234,217,232 order=0   vs naeli cost=229,194,227 order=0
+Update naelk cost=227,194,225 order=0  was naeli cost=229,194,227 order=0
+Skip   nae90 cost=285,274,283 order=0   vs 08ben cost=209,154,207 order=0
+Skip   nae91 cost=222,170,220 order=0   vs 08ben cost=209,154,207 order=0
+New    nae92 cost=413,303,411 order=0
+Update nae93 cost=219,171,217 order=0  was nae92 cost=413,303,411 order=0
+New    nae9h cost=227,217,225 order=0
+Update nae9i cost=214,171,212 order=0  was nae9h cost=227,217,225 order=0
+Skip   nae9j cost=217,194,215 order=0   vs nae9i cost=214,171,212 order=0
+Update nae9k cost=213,171,211 order=0  was nae9i cost=214,171,212 order=0
+Update nae9l cost=235,217,233 order=0  was nael9 cost=251,217,249 order=0
+Skip   ae930 cost=282,271,280 order=0   vs 08be3 cost=209,151,207 order=0
+Skip   ae931 cost=223,167,221 order=0   vs 08be3 cost=209,151,207 order=0
+New    ae93h cost=227,214,225 order=0
+Update ae93i cost=218,168,216 order=0  was ae93h cost=227,214,225 order=0
+New    ae93l cost=234,214,232 order=0
+Update ae93m cost=218,168,216 order=0  was ae93l cost=234,214,232 order=0
+Skip   ae93n cost=221,171,219 order=0   vs nae93 cost=219,171,217 order=0
+New    nlj02 cost=417,307,415 order=0
+Update nlj04 cost=267,261,265 order=0  was nlj02 cost=417,307,415 order=0
+New    nlj06 cost=416,400,414 order=0
+Update nlj08 cost=249,224,247 order=0  was nlj06 cost=416,400,414 order=0
+New    nlj0a cost=342,320,340 order=0
+New    nlj0d cost=353,347,351 order=0
+Update nlj0f cost=306,300,304 order=0  was nlj0d cost=353,347,351 order=0
+New    083ma cost=319,297,317 order=0
+Update 083mb cost=207,151,205 order=0  was 083ma cost=319,297,317 order=0
+New    083md cost=330,324,328 order=0
+New    083mh cost=211,198,209 order=0
+New    083mn cost=204,155,202 order=0
+Skip   08bh2 cost=439,329,437 order=0
+New    08bh3 cost=239,197,237 order=0
+Skip   08bhd cost=375,369,373 order=0   vs 08bei cost=207,151,205 order=0
+Skip   08bhe cost=242,197,240 order=0   vs 08bei cost=207,151,205 order=0
+Skip   08bhf cost=328,322,326 order=0   vs 08bei cost=207,151,205 order=0
+Skip   08bhg cost=240,197,238 order=0   vs 08bei cost=207,151,205 order=0
+New    08bhl cost=259,243,257 order=0
+New    08bhn cost=238,200,236 order=0
+Update 08bho cost=226,196,224 order=0  was 08bhn cost=238,200,236 order=0
+Skip   na9j0 cost=308,297,306 order=0   vs 08bho cost=226,196,224 order=0
+Skip   na9j1 cost=240,193,238 order=0   vs 08bho cost=226,196,224 order=0
+Skip   na9j2 cost=436,326,434 order=0
+New    na9j3 cost=237,194,235 order=0
+Skip   na9jd cost=372,366,370 order=0   vs nae9k cost=213,171,211 order=0
+Skip   na9je cost=240,194,238 order=0   vs nae9k cost=213,171,211 order=0
+Skip   na9jf cost=325,319,323 order=0   vs nae9k cost=213,171,211 order=0
+Skip   na9jg cost=238,194,236 order=0   vs nae9k cost=213,171,211 order=0
+New    na9jl cost=257,240,255 order=0
+Skip   nlj40 cost=272,261,270 order=0
+Skip   nlj46 cost=399,383,397 order=0
+Skip   nlj47 cost=272,250,270 order=0
+Skip   nlj4a cost=325,303,323 order=0
+Skip   nlj4d cost=336,330,334 order=0
+Skip   nlj4f cost=289,283,287 order=0
+Skip   n08b2 cost=396,286,394 order=0
+New    n08b3 cost=208,154,206 order=0
+Skip   n08bd cost=332,326,330 order=0   vs 08ben cost=209,154,207 order=0
+Skip   n08be cost=209,154,207 order=0   vs 08ben cost=209,154,207 order=0
+Update n08bh cost=214,200,212 order=0  was 08bho cost=226,196,224 order=0
+Update n08bj cost=207,177,205 order=0  was n08bh cost=214,200,212 order=0
+New    n08bl cost=220,200,218 order=0
+Skip   n08j2 cost=420,310,418 order=0
+New    n08j3 cost=221,178,219 order=0
+Skip   n08ja cost=345,323,343 order=0   vs n08bj cost=207,177,205 order=0
+Skip   n08jb cost=225,177,223 order=0   vs n08bj cost=207,177,205 order=0
+Skip   n08jd cost=356,350,354 order=0
+Skip   n08jf cost=309,303,307 order=0
+Skip   n08jl cost=241,224,239 order=0
+Skip   nljf0 cost=311,300,309 order=0
+Skip   nljf2 cost=439,329,437 order=0
+Skip   nljf4 cost=289,283,287 order=0
+Skip   nljf6 cost=438,422,436 order=0
+Skip   nljfa cost=364,342,362 order=0   vs naelk cost=227,194,225 order=0
+Skip   nljfc cost=263,236,261 order=0   vs naelk cost=227,194,225 order=0
+Skip   083ha cost=365,343,363 order=0
+Skip   083hb cost=244,197,242 order=0
+Skip   083hd cost=376,370,374 order=0
+Skip   083hf cost=329,323,327 order=0
+Skip   083hl cost=260,244,258 order=0   vs 083mh cost=211,198,209 order=0
+Skip   083hm cost=230,198,228 order=0   vs 083mh cost=211,198,209 order=0
+Skip   083hn cost=239,201,237 order=0   vs n08j3 cost=221,178,219 order=0
+Skip   083ho cost=227,197,225 order=0   vs n08j3 cost=221,178,219 order=0
+Skip   aeil0 cost=305,294,303 order=0
+Skip   aeil2 cost=433,323,431 order=0
+Skip   aeil4 cost=283,277,281 order=0
+Skip   aeil6 cost=432,416,430 order=0
+Skip   aeil9 cost=248,214,246 order=0
+Skip   aeiln cost=233,194,231 order=0   vs naelk cost=227,194,225 order=0
+Update aeilo cost=222,190,220 order=0  was naelk cost=227,194,225 order=0
+Skip   08b3d cost=329,323,327 order=0   vs 08be3 cost=209,151,207 order=0
+Skip   08b3e cost=209,151,207 order=0   vs 08be3 cost=209,151,207 order=0
+New    08b3h cost=213,197,211 order=0
+Skip   08b3l cost=219,197,217 order=0   vs 083mb cost=207,151,205 order=0
+Update 08b3m cost=206,151,204 order=0  was 083mb cost=207,151,205 order=0
+Skip   08b3n cost=208,154,206 order=0   vs n08b3 cost=208,154,206 order=0
+Skip   n083a cost=322,300,320 order=0   vs n08b3 cost=208,154,206 order=0
+Skip   n083b cost=209,154,207 order=0   vs n08b3 cost=208,154,206 order=0
+Skip   n083d cost=333,327,331 order=0
+Update n083h cost=213,201,211 order=0  was n08j3 cost=221,178,219 order=0
+Update n083j cost=204,178,202 order=0  was n083h cost=213,201,211 order=0
+Skip   n083l cost=220,201,218 order=0   vs 083mn cost=204,155,202 order=0
+Update n083m cost=202,155,200 order=0  was 083mn cost=204,155,202 order=0
+Skip   aei90 cost=282,271,280 order=0   vs 08bei cost=207,151,205 order=0
+Skip   aei91 cost=219,167,217 order=0   vs 08bei cost=207,151,205 order=0
+Skip   aei92 cost=410,300,408 order=0   vs ae93i cost=218,168,216 order=0
+Update aei93 cost=217,168,215 order=0  was ae93i cost=218,168,216 order=0
+New    aei9l cost=232,214,230 order=0
+Skip   aei9n cost=216,171,214 order=0   vs nae9k cost=213,171,211 order=0
+Update aei9o cost=210,167,208 order=0  was nae9k cost=213,171,211 order=0
+Skip   aeio0 cost=258,247,256 order=0
+Skip   aeio2 cost=386,276,384 order=0
+Skip   aeio6 cost=385,369,383 order=0   vs aei9o cost=210,167,208 order=0
+Update aeio9 cost=207,167,205 order=0  was aei9o cost=210,167,208 order=0
+Update aeiol cost=211,190,209 order=0  was aeilo cost=222,190,220 order=0
+---- after round 4 ----
+ n083m cost=202 nrow=155 order=0
+ n083j cost=204 nrow=178 order=0
+ 08b3m cost=206 nrow=151 order=0
+ 08bei cost=207 nrow=151 order=0
+ n08bj cost=207 nrow=177 order=0
+ aeio9 cost=207 nrow=167 order=0
+ n08b3 cost=208 nrow=154 order=0
+ 08be3 cost=209 nrow=151 order=0
+ 08ben cost=209 nrow=154 order=0
+ aeiol cost=211 nrow=190 order=0
+ 083mh cost=211 nrow=198 order=0
+ 08b3h cost=213 nrow=197 order=0
+ aei93 cost=217 nrow=168 order=0
+ ae93m cost=218 nrow=168 order=0
+ 08bel cost=219 nrow=197 order=0
+ nae93 cost=219 nrow=171 order=0
+ n08bl cost=220 nrow=200 order=0
+ aei9l cost=232 nrow=214 order=0
+New    08be3h cost=215,197,213 order=0
+Update 08be3i cost=209,151,207 order=0  was 08be3h cost=215,197,213 order=0
+New    08be3l cost=220,197,218 order=0
+Update 08be3m cost=209,151,207 order=0  was 08be3l cost=220,197,218 order=0
+New    08be3n cost=211,154,209 order=0
+Skip   08bei2 cost=393,283,391 order=0   vs 08be3i cost=209,151,207 order=0
+Skip   08bei3 cost=210,151,208 order=0   vs 08be3i cost=209,151,207 order=0
+New    08beil cost=220,197,218 order=0
+New    08bein cost=209,154,207 order=0
+Update 08beio cost=207,150,205 order=0  was 08bein cost=209,154,207 order=0
+Skip   08bel2 cost=439,329,437 order=0   vs 08be3m cost=209,151,207 order=0
+Skip   08bel3 cost=240,197,238 order=0   vs 08be3m cost=209,151,207 order=0
+Skip   08bel4 cost=289,283,287 order=0   vs 08be3m cost=209,151,207 order=0
+Skip   08bel5 cost=239,197,237 order=0   vs 08be3m cost=209,151,207 order=0
+Skip   08belh cost=250,243,248 order=0   vs 08beil cost=220,197,218 order=0
+Skip   08beli cost=232,197,230 order=0   vs 08beil cost=220,197,218 order=0
+New    08beln cost=239,200,237 order=0
+Skip   08ben2 cost=396,286,394 order=0   vs 08be3n cost=211,154,209 order=0
+Skip   08ben3 cost=212,154,210 order=0   vs 08be3n cost=211,154,209 order=0
+Skip   08benh cost=217,200,215 order=0   vs 08beio cost=207,150,205 order=0
+Skip   08beni cost=210,154,208 order=0   vs 08beio cost=207,150,205 order=0
+Skip   08benj cost=211,177,209 order=0   vs 08beio cost=207,150,205 order=0
+Skip   08benk cost=209,154,207 order=0   vs 08beio cost=207,150,205 order=0
+Update 08benl cost=222,200,220 order=0  was 08beln cost=239,200,237 order=0
+New    n083ja cost=345,323,343 order=0
+Update n083jb cost=226,177,224 order=0  was n083ja cost=345,323,343 order=0
+New    n083jd cost=356,350,354 order=0
+Update n083jf cost=309,303,307 order=0  was n083jd cost=356,350,354 order=0
+New    n083jl cost=241,224,239 order=0
+Update n083jm cost=215,178,213 order=0  was n083jl cost=241,224,239 order=0
+Skip   n08bj2 cost=419,309,417 order=0   vs n083jb cost=226,177,224 order=0
+Update n08bj3 cost=222,177,220 order=0  was n083jb cost=226,177,224 order=0
+Skip   n08bjd cost=355,349,353 order=0   vs 08beio cost=207,150,205 order=0
+Skip   n08bje cost=224,177,222 order=0   vs 08beio cost=207,150,205 order=0
+Skip   n08bjf cost=308,302,306 order=0   vs 08beio cost=207,150,205 order=0
+Skip   n08bjg cost=223,177,221 order=0   vs 08beio cost=207,150,205 order=0
+New    n08bjl cost=240,223,238 order=0
+Skip   aei9l0 cost=328,317,326 order=0   vs 08beil cost=220,197,218 order=0
+Skip   aei9l1 cost=260,213,258 order=0   vs 08beil cost=220,197,218 order=0
+New    aei9l2 cost=456,346,454 order=0
+Update aei9l3 cost=257,214,255 order=0  was aei9l2 cost=456,346,454 order=0
+Skip   aei9l4 cost=306,300,304 order=0   vs aei9l3 cost=257,214,255 order=0
+Update aei9l5 cost=256,214,254 order=0  was aei9l3 cost=257,214,255 order=0
+New    aei9ln cost=256,217,254 order=0
+Update aei9lo cost=245,213,243 order=0  was aei9ln cost=256,217,254 order=0
+New    aeiol0 cost=304,293,302 order=0
+New    aeiol2 cost=432,322,430 order=0
+Update aeiol4 cost=282,276,280 order=0  was aeiol2 cost=432,322,430 order=0
+Skip   aeiol6 cost=431,415,429 order=0   vs aei9lo cost=245,213,243 order=0
+Skip   aeiol9 cost=247,213,245 order=0   vs aei9lo cost=245,213,243 order=0
+Skip   nae930 cost=285,274,283 order=0   vs 08be3n cost=211,154,209 order=0
+Skip   nae931 cost=226,170,224 order=0   vs 08be3n cost=211,154,209 order=0
+New    nae93h cost=230,217,228 order=0
+Update nae93i cost=221,171,219 order=0  was nae93h cost=230,217,228 order=0
+Skip   nae93j cost=223,194,221 order=0   vs nae93i cost=221,171,219 order=0
+Update nae93k cost=220,171,218 order=0  was nae93i cost=221,171,219 order=0
+New    nae93l cost=237,217,235 order=0
+Update nae93m cost=221,171,219 order=0  was nae93l cost=237,217,235 order=0
+Skip   aeio90 cost=281,270,279 order=0   vs 08beio cost=207,150,205 order=0
+Skip   aeio91 cost=218,166,216 order=0   vs 08beio cost=207,150,205 order=0
+Skip   aeio92 cost=409,299,407 order=0   vs nae93k cost=220,171,218 order=0
+Update aeio93 cost=216,167,214 order=0  was nae93k cost=220,171,218 order=0
+Update aeio9l cost=232,213,230 order=0  was aei9lo cost=245,213,243 order=0
+Skip   aei930 cost=282,271,280 order=0   vs 08be3i cost=209,151,207 order=0
+Skip   aei931 cost=224,167,222 order=0   vs 08be3i cost=209,151,207 order=0
+Update aei93l cost=234,214,232 order=0  was aei9l5 cost=256,214,254 order=0
+Update aei93m cost=219,168,217 order=0  was aei93l cost=234,214,232 order=0
+Skip   aei93n cost=222,171,220 order=0   vs aeio93 cost=216,167,214 order=0
+Skip   aei93o cost=218,167,216 order=0   vs aeio93 cost=216,167,214 order=0
+Skip   ae93m0 cost=282,271,280 order=0   vs 08be3m cost=209,151,207 order=0
+Skip   ae93m1 cost=224,167,222 order=0   vs 08be3m cost=209,151,207 order=0
+Skip   ae93mh cost=228,214,226 order=0   vs aei93m cost=219,168,217 order=0
+Skip   ae93mi cost=219,168,217 order=0   vs aei93m cost=219,168,217 order=0
+Skip   ae93mn cost=222,171,220 order=0   vs nae93m cost=221,171,219 order=0
+Skip   08b3hd cost=375,369,373 order=0   vs 08be3i cost=209,151,207 order=0
+Skip   08b3he cost=242,197,240 order=0   vs 08be3i cost=209,151,207 order=0
+Skip   08b3hf cost=328,322,326 order=0   vs 08be3i cost=209,151,207 order=0
+Skip   08b3hg cost=240,197,238 order=0   vs 08be3i cost=209,151,207 order=0
+New    08b3hl cost=260,243,258 order=0
+Update 08b3hm cost=230,197,228 order=0  was 08b3hl cost=260,243,258 order=0
+Skip   08b3hn cost=238,200,236 order=0   vs n08bj3 cost=222,177,220 order=0
+Skip   08b3ho cost=227,196,225 order=0   vs n08bj3 cost=222,177,220 order=0
+New    n08bl2 cost=442,332,440 order=0
+Update n08bl3 cost=243,200,241 order=0  was n08bl2 cost=442,332,440 order=0
+Skip   n08bl4 cost=292,286,290 order=0   vs n08bl3 cost=243,200,241 order=0
+Update n08bl5 cost=242,200,240 order=0  was n08bl3 cost=243,200,241 order=0
+Skip   n08bld cost=378,372,376 order=0   vs 08benl cost=222,200,220 order=0
+Skip   n08ble cost=245,200,243 order=0   vs 08benl cost=222,200,220 order=0
+Skip   n08blh cost=253,246,251 order=0   vs n08bjl cost=240,223,238 order=0
+Skip   n08blj cost=240,223,238 order=0   vs n08bjl cost=240,223,238 order=0
+Skip   083mha cost=365,343,363 order=0   vs 08b3hm cost=230,197,228 order=0
+Skip   083mhb cost=244,197,242 order=0   vs 08b3hm cost=230,197,228 order=0
+Skip   083mhd cost=376,370,374 order=0
+Skip   083mhf cost=329,323,327 order=0
+Skip   083mhn cost=239,201,237 order=0   vs n083jm cost=215,178,213 order=0
+Skip   083mho cost=227,197,225 order=0   vs n083jm cost=215,178,213 order=0
+Skip   n08b3d cost=332,326,330 order=0   vs 08be3n cost=211,154,209 order=0
+Skip   n08b3e cost=212,154,210 order=0   vs 08be3n cost=211,154,209 order=0
+Update n08b3h cost=216,200,214 order=0  was n08bj3 cost=222,177,220 order=0
+Update n08b3j cost=210,177,208 order=0  was n08b3h cost=216,200,214 order=0
+Update n08b3l cost=222,200,220 order=0  was n08bl5 cost=242,200,240 order=0
+Update n08b3m cost=209,154,207 order=0  was n08b3l cost=222,200,220 order=0
+Skip   08b3md cost=329,323,327 order=0   vs 08be3m cost=209,151,207 order=0
+Skip   08b3me cost=210,151,208 order=0   vs 08be3m cost=209,151,207 order=0
+Update 08b3mh cost=214,197,212 order=0  was 08b3hm cost=230,197,228 order=0
+Skip   08b3mn cost=209,154,207 order=0   vs n08b3m cost=209,154,207 order=0
+Skip   n083ma cost=322,300,320 order=0   vs n08b3m cost=209,154,207 order=0
+Skip   n083mb cost=210,154,208 order=0   vs n08b3m cost=209,154,207 order=0
+Skip   n083md cost=333,327,331 order=0
+Update n083mh cost=214,201,212 order=0  was n083jm cost=215,178,213 order=0
+Update n083mj cost=206,178,204 order=0  was n083mh cost=214,201,212 order=0
+---- after round 5 ----
+ n083mj cost=206 nrow=178 order=0
+ 08beio cost=207 nrow=150 order=0
+ 08be3i cost=209 nrow=151 order=0
+ 08be3m cost=209 nrow=151 order=0
+ n08b3m cost=209 nrow=154 order=0
+ n08b3j cost=210 nrow=177 order=0
+ 08be3n cost=211 nrow=154 order=0
+ 08b3mh cost=214 nrow=197 order=0
+ aeio93 cost=216 nrow=167 order=0
+ aei93m cost=219 nrow=168 order=0
+ 08beil cost=220 nrow=197 order=0
+ nae93m cost=221 nrow=171 order=0
+ 08benl cost=222 nrow=200 order=0
+ aeio9l cost=232 nrow=213 order=0
+ n08bjl cost=240 nrow=223 order=0
+ aeiol4 cost=282 nrow=276 order=0
+ aeiol0 cost=304 nrow=293 order=0
+ n083jf cost=309 nrow=303 order=0
+New    08be3il cost=220,197,218 order=0
+Update 08be3im cost=209,151,207 order=0  was 08be3il cost=220,197,218 order=0
+New    08be3in cost=211,154,209 order=0
+Update 08be3io cost=208,150,206 order=0  was 08be3in cost=211,154,209 order=0
+Skip   08be3mh cost=215,197,213 order=0   vs 08be3im cost=209,151,207 order=0
+Skip   08be3mi cost=209,151,207 order=0   vs 08be3im cost=209,151,207 order=0
+New    08be3mn cost=211,154,209 order=0
+Skip   08be3nh cost=218,200,216 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   08be3ni cost=211,154,209 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   08be3nj cost=212,177,210 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   08be3nk cost=211,154,209 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   08be3nl cost=223,200,221 order=0   vs 08be3mn cost=211,154,209 order=0
+Skip   08be3nm cost=211,154,209 order=0   vs 08be3mn cost=211,154,209 order=0
+Skip   08beil2 cost=439,329,437 order=0   vs 08be3im cost=209,151,207 order=0
+Skip   08beil3 cost=240,197,238 order=0   vs 08be3im cost=209,151,207 order=0
+Skip   08beil4 cost=289,283,287 order=0   vs 08be3im cost=209,151,207 order=0
+Skip   08beil5 cost=240,197,238 order=0   vs 08be3im cost=209,151,207 order=0
+New    08beiln cost=240,200,238 order=0
+Update 08beilo cost=230,196,228 order=0  was 08beiln cost=240,200,238 order=0
+Skip   08beio2 cost=392,282,390 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   08beio3 cost=209,150,207 order=0   vs 08be3io cost=208,150,206 order=0
+Update 08beiol cost=219,196,217 order=0  was 08beilo cost=230,196,228 order=0
+Skip   08benl2 cost=442,332,440 order=0   vs 08be3mn cost=211,154,209 order=0
+Skip   08benl3 cost=243,200,241 order=0   vs 08be3mn cost=211,154,209 order=0
+Skip   08benl4 cost=292,286,290 order=0   vs 08be3mn cost=211,154,209 order=0
+Skip   08benl5 cost=242,200,240 order=0   vs 08be3mn cost=211,154,209 order=0
+Skip   08benlh cost=253,246,251 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   08benli cost=235,200,233 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   08benlj cost=240,223,238 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   08benlk cost=233,200,231 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   n08b3jd cost=355,349,353 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   n08b3je cost=225,177,223 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   n08b3jf cost=308,302,306 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   n08b3jg cost=224,177,222 order=0   vs 08be3io cost=208,150,206 order=0
+New    n08b3jl cost=241,223,239 order=0
+Update n08b3jm cost=217,177,215 order=0  was n08b3jl cost=241,223,239 order=0
+Skip   n083jfa cost=470,448,468 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   n083jfb cost=349,302,347 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   n083jfc cost=369,342,367 order=0   vs 08be3io cost=208,150,206 order=0
+New    n083jfl cost=365,349,363 order=0
+Update n083jfm cost=334,303,332 order=0  was n083jfl cost=365,349,363 order=0
+Skip   n083mja cost=345,323,343 order=0   vs n08b3jm cost=217,177,215 order=0
+Skip   n083mjb cost=226,177,224 order=0   vs n08b3jm cost=217,177,215 order=0
+Skip   n083mjd cost=356,350,354 order=0   vs n083jfm cost=334,303,332 order=0
+Update n083mjf cost=309,303,307 order=0  was n083jfm cost=334,303,332 order=0
+Skip   n08bjl2 cost=465,355,463 order=0   vs n08b3jm cost=217,177,215 order=0
+Skip   n08bjl3 cost=265,223,263 order=0   vs n08b3jm cost=217,177,215 order=0
+Skip   n08bjl4 cost=315,309,313 order=0   vs n08b3jm cost=217,177,215 order=0
+Skip   n08bjl5 cost=265,223,263 order=0   vs n08b3jm cost=217,177,215 order=0
+Skip   n08bjld cost=401,395,399 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   n08bjle cost=268,223,266 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   n08bjlf cost=354,348,352 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   n08bjlg cost=266,223,264 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   aei93m0 cost=282,271,280 order=0   vs 08be3im cost=209,151,207 order=0
+Skip   aei93m1 cost=225,167,223 order=0   vs 08be3im cost=209,151,207 order=0
+New    aei93mn cost=223,171,221 order=0
+Update aei93mo cost=219,167,217 order=0  was aei93mn cost=223,171,221 order=0
+Skip   aeio9l0 cost=327,316,325 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   aeio9l1 cost=259,212,257 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   aeio9l2 cost=455,345,453 order=0   vs aei93mo cost=219,167,217 order=0
+Skip   aeio9l3 cost=256,213,254 order=0   vs aei93mo cost=219,167,217 order=0
+Skip   aeio9l4 cost=305,299,303 order=0   vs aei93mo cost=219,167,217 order=0
+Skip   aeio9l5 cost=255,213,253 order=0   vs aei93mo cost=219,167,217 order=0
+New    aeiol02 cost=535,425,533 order=0
+Update aeiol04 cost=385,379,383 order=0  was aeiol02 cost=535,425,533 order=0
+Skip   aeiol06 cost=534,518,532 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   aeiol08 cost=367,342,365 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   aeiol09 cost=350,316,348 order=0   vs 08beiol cost=219,196,217 order=0
+Skip   aeiol40 cost=390,379,388 order=0   vs aeiol04 cost=385,379,383 order=0
+Skip   aeiol46 cost=517,501,515 order=0   vs aei93mo cost=219,167,217 order=0
+Skip   aeiol47 cost=390,368,388 order=0   vs aei93mo cost=219,167,217 order=0
+Skip   aeiol49 cost=332,299,330 order=0   vs aei93mo cost=219,167,217 order=0
+Skip   aeio930 cost=281,270,279 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   aeio931 cost=223,166,221 order=0   vs 08be3io cost=208,150,206 order=0
+Skip   aeio93l cost=233,213,231 order=0   vs aei93mo cost=219,167,217 order=0
+Update aeio93m cost=218,167,216 order=0  was aei93mo cost=219,167,217 order=0
+Skip   nae93m0 cost=285,274,283 order=0   vs 08be3mn cost=211,154,209 order=0
+Skip   nae93m1 cost=227,170,225 order=0   vs 08be3mn cost=211,154,209 order=0
+Skip   nae93mh cost=231,217,229 order=0   vs aeio93m cost=218,167,216 order=0
+Skip   nae93mi cost=222,171,220 order=0   vs aeio93m cost=218,167,216 order=0
+Skip   nae93mj cost=224,194,222 order=0   vs aeio93m cost=218,167,216 order=0
+Skip   nae93mk cost=222,171,220 order=0   vs aeio93m cost=218,167,216 order=0
+Skip   08b3mhd cost=375,369,373 order=0   vs 08be3im cost=209,151,207 order=0
+Skip   08b3mhe cost=242,197,240 order=0   vs 08be3im cost=209,151,207 order=0
+Skip   08b3mhf cost=328,322,326 order=0   vs 08be3im cost=209,151,207 order=0
+Skip   08b3mhg cost=240,197,238 order=0   vs 08be3im cost=209,151,207 order=0
+Skip   08b3mhn cost=239,200,237 order=0   vs n08b3jm cost=217,177,215 order=0
+Skip   08b3mho cost=227,196,225 order=0   vs n08b3jm cost=217,177,215 order=0
+Skip   n08b3md cost=332,326,330 order=0   vs 08be3mn cost=211,154,209 order=0
+Skip   n08b3me cost=213,154,211 order=0   vs 08be3mn cost=211,154,209 order=0
+Skip   n08b3mh cost=217,200,215 order=0   vs n08b3jm cost=217,177,215 order=0
+Update n08b3mj cost=211,177,209 order=0  was n08b3jm cost=217,177,215 order=0
+---- after round 6 ----
+ 08be3io cost=208 nrow=150 order=0
+ 08be3im cost=209 nrow=151 order=0
+ 08be3mn cost=211 nrow=154 order=0
+ n08b3mj cost=211 nrow=177 order=0
+ aeio93m cost=218 nrow=167 order=0
+ 08beiol cost=219 nrow=196 order=0
+ n083mjf cost=309 nrow=303 order=0
+ aeiol04 cost=385 nrow=379 order=0
+New    08be3imn cost=211,154,209 order=0
+Update 08be3imo cost=208,150,206 order=0  was 08be3imn cost=211,154,209 order=0
+Skip   08be3iol cost=219,196,217 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   08be3iom cost=208,150,206 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   08be3mnh cost=218,200,216 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   08be3mni cost=211,154,209 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   08be3mnj cost=212,177,210 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   08be3mnk cost=211,154,209 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   08beiol2 cost=438,328,436 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   08beiol3 cost=239,196,237 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   08beiol4 cost=288,282,286 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   08beiol5 cost=239,196,237 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   n08b3mjd cost=355,349,353 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   n08b3mje cost=226,177,224 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   n08b3mjf cost=308,302,306 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   n08b3mjg cost=224,177,222 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   n083mjfa cost=470,448,468 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   n083mjfb cost=349,302,347 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   n083mjfc cost=369,342,367 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   aeio93m0 cost=281,270,279 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   aeio93m1 cost=224,166,222 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   aeiol046 cost=620,604,618 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   aeiol047 cost=493,471,491 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   aeiol048 cost=453,428,451 order=0   vs 08be3imo cost=208,150,206 order=0
+Skip   aeiol049 cost=435,402,433 order=0   vs 08be3imo cost=208,150,206 order=0
+---- after round 7 ----
+ 08be3imo cost=208 nrow=150 order=0
+Loops disabled by interstage heuristic:
+6 2.004.000     lineitem                     f 000100 N 0 cost 0,241,225
+d 4.010.000     customer.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172
+2 1.002.000     supplier.idx_supplier_nationkey  0 f 000240 N 0 cost 0,242,132 delta=104
+h 5.020.000           n1.idx_nation_regionkey  0 f 000240 N 0 cost 0,52,46
+l 6.040.000           n2                     f 000100 N 0 cost 0,62,46
+n 7.080.000       region                     f 800100 N 0 cost 0,39,3
+---- begin solver.  (nRowEst=151, nQueryLoop=0)
+---- sort cost=200 (1/1) increases cost 114 to 203
+New    0 cost=203,103,114 order=0
+---- sort cost=200 (1/1) increases cost 167 to 204
+New    a cost=204,145,167 order=0
+---- after round 0 ----
+ 0 cost=203 nrow=103 order=0
+ a cost=204 nrow=145 order=0
+---- sort cost=200 (1/1) increases cost 177 to 206
+New    08 cost=206,152,177 order=0
+---- sort cost=200 (1/1) increases cost 270 to 273
+New    0a cost=273,248,270 order=0
+---- sort cost=200 (1/1) increases cost 259 to 262
+Update a0 cost=262,248,259 order=0  was 0a cost=273,248,270 order=0
+---- sort cost=200 (1/1) increases cost 202 to 214
+New    a9 cost=214,168,202 order=0
+---- sort cost=200 (1/1) increases cost 191 to 209
+New    ae cost=209,145,191 order=0
+---- after round 1 ----
+ 08 cost=206 nrow=152 order=0
+ ae cost=209 nrow=145 order=0
+ a9 cost=214 nrow=168 order=0
+ a0 cost=262 nrow=248 order=0
+---- sort cost=200 (1/1) increases cost 196 to 211
+New    083 cost=211,152,196 order=0
+---- sort cost=200 (1/1) increases cost 319 to 322
+New    08a cost=322,297,319 order=0
+---- sort cost=200 (1/1) increases cost 200 to 213
+Update 08b cost=213,151,200 order=0  was 08a cost=322,297,319 order=0
+---- sort cost=200 (1/1) increases cost 322 to 325
+Skip   a08 cost=325,297,322 order=0   vs 08b cost=213,151,200 order=0
+---- sort cost=200 (1/1) increases cost 305 to 308
+Skip   a09 cost=308,271,305 order=0   vs 08b cost=213,151,200 order=0
+---- sort cost=200 (1/1) increases cost 292 to 295
+New    a0e cost=295,248,292 order=0
+---- sort cost=200 (1/1) increases cost 282 to 285
+Skip   a90 cost=285,271,282 order=0   vs 08b cost=213,151,200 order=0
+---- sort cost=200 (1/1) increases cost 218 to 225
+Skip   a91 cost=225,167,218 order=0   vs 08b cost=213,151,200 order=0
+---- sort cost=200 (1/1) increases cost 215 to 222
+New    a93 cost=222,168,215 order=0
+---- sort cost=200 (1/1) increases cost 217 to 224
+New    a9e cost=224,168,217 order=0
+---- sort cost=200 (1/1) increases cost 259 to 262
+Update ae0 cost=262,248,259 order=0  was a0e cost=295,248,292 order=0
+---- sort cost=200 (1/1) increases cost 207 to 217
+Update ae9 cost=217,168,207 order=0  was a9e cost=224,168,217 order=0
+---- sort cost=200 (1/1) increases cost 195 to 211
+New    aei cost=211,145,195 order=0
+---- after round 2 ----
+ 083 cost=211 nrow=152 order=0
+ aei cost=211 nrow=145 order=0
+ 08b cost=213 nrow=151 order=0
+ ae9 cost=217 nrow=168 order=0
+ a93 cost=222 nrow=168 order=0
+ ae0 cost=262 nrow=248 order=0
+---- sort cost=200 (1/1) increases cost 319 to 322
+New    083a cost=322,297,319 order=0
+---- sort cost=200 (1/1) increases cost 207 to 217
+Update 083b cost=217,151,207 order=0  was 083a cost=322,297,319 order=0
+---- sort cost=200 (1/1) increases cost 200 to 213
+New    083m cost=213,152,200 order=0
+---- sort cost=200 (1/1) increases cost 206 to 216
+Update 08b3 cost=216,151,206 order=0  was 083b cost=217,151,207 order=0
+---- sort cost=200 (1/1) increases cost 207 to 217
+New    08be cost=217,151,207 order=0
+---- sort cost=200 (1/1) increases cost 322 to 325
+Skip   ae08 cost=325,297,322 order=0   vs 08be cost=217,151,207 order=0
+---- sort cost=200 (1/1) increases cost 305 to 308
+Skip   ae09 cost=308,271,305 order=0   vs 08be cost=217,151,207 order=0
+---- sort cost=200 (1/1) increases cost 281 to 284
+New    ae0i cost=284,248,281 order=0
+---- sort cost=200 (1/1) increases cost 282 to 285
+Skip   a930 cost=285,271,282 order=0   vs 08b3 cost=216,151,206 order=0
+---- sort cost=200 (1/1) increases cost 224 to 230
+Skip   a931 cost=230,167,224 order=0   vs 08b3 cost=216,151,206 order=0
+---- sort cost=200 (1/1) increases cost 223 to 229
+New    a93e cost=229,168,223 order=0
+---- sort cost=200 (1/1) increases cost 219 to 225
+New    a93m cost=225,168,219 order=0
+---- sort cost=200 (1/1) increases cost 282 to 285
+Skip   ae90 cost=285,271,282 order=0   vs 08be cost=217,151,207 order=0
+---- sort cost=200 (1/1) increases cost 220 to 226
+Skip   ae91 cost=226,167,220 order=0   vs 08be cost=217,151,207 order=0
+---- sort cost=200 (1/1) increases cost 218 to 225
+Update ae93 cost=225,168,218 order=0  was a93e cost=229,168,223 order=0
+---- sort cost=200 (1/1) increases cost 213 to 221
+New    ae9i cost=221,168,213 order=0
+---- sort cost=200 (1/1) increases cost 259 to 262
+Update aei0 cost=262,248,259 order=0  was ae0i cost=284,248,281 order=0
+---- sort cost=200 (1/1) increases cost 208 to 218
+Update aei9 cost=218,168,208 order=0  was ae9i cost=221,168,213 order=0
+---- sort cost=200 (1/1) increases cost 197 to 212
+New    aeio cost=212,144,197 order=0
+---- after round 3 ----
+ aeio cost=212 nrow=144 order=0
+ 083m cost=213 nrow=152 order=0
+ 08b3 cost=216 nrow=151 order=0
+ 08be cost=217 nrow=151 order=0
+ aei9 cost=218 nrow=168 order=0
+ ae93 cost=225 nrow=168 order=0
+ a93m cost=225 nrow=168 order=0
+ aei0 cost=262 nrow=248 order=0
+---- sort cost=200 (1/1) increases cost 211 to 220
+New    08b3e cost=220,151,211 order=0
+---- sort cost=200 (1/1) increases cost 208 to 218
+New    08b3m cost=218,151,208 order=0
+---- sort cost=200 (1/1) increases cost 319 to 322
+Skip   083ma cost=322,297,319 order=0   vs 08b3m cost=218,151,208 order=0
+---- sort cost=200 (1/1) increases cost 209 to 218
+Skip   083mb cost=218,151,209 order=0   vs 08b3m cost=218,151,208 order=0
+---- sort cost=200 (1/1) increases cost 211 to 220
+Skip   08be3 cost=220,151,211 order=0   vs 08b3e cost=220,151,211 order=0
+---- sort cost=200 (1/1) increases cost 209 to 218
+New    08bei cost=218,151,209 order=0
+---- sort cost=200 (1/1) increases cost 322 to 325
+Skip   aei08 cost=325,297,322 order=0   vs 08bei cost=218,151,209 order=0
+---- sort cost=200 (1/1) increases cost 305 to 308
+Skip   aei09 cost=308,271,305 order=0   vs 08bei cost=218,151,209 order=0
+---- sort cost=200 (1/1) increases cost 277 to 280
+New    aei0o cost=280,247,277 order=0
+---- sort cost=200 (1/1) increases cost 282 to 285
+Skip   ae930 cost=285,271,282 order=0   vs 08b3e cost=220,151,211 order=0
+---- sort cost=200 (1/1) increases cost 225 to 230
+Skip   ae931 cost=230,167,225 order=0   vs 08b3e cost=220,151,211 order=0
+---- sort cost=200 (1/1) increases cost 221 to 227
+New    ae93i cost=227,168,221 order=0
+---- sort cost=200 (1/1) increases cost 221 to 227
+New    ae93m cost=227,168,221 order=0
+---- sort cost=200 (1/1) increases cost 282 to 285
+Skip   a93m0 cost=285,271,282 order=0   vs 08b3m cost=218,151,208 order=0
+---- sort cost=200 (1/1) increases cost 226 to 231
+Skip   a93m1 cost=231,167,226 order=0   vs 08b3m cost=218,151,208 order=0
+---- sort cost=200 (1/1) increases cost 226 to 231
+Skip   a93me cost=231,168,226 order=0   vs ae93m cost=227,168,221 order=0
+---- sort cost=200 (1/1) increases cost 282 to 285
+Skip   aei90 cost=285,271,282 order=0   vs 08bei cost=218,151,209 order=0
+---- sort cost=200 (1/1) increases cost 220 to 226
+Skip   aei91 cost=226,167,220 order=0   vs 08bei cost=218,151,209 order=0
+---- sort cost=200 (1/1) increases cost 218 to 225
+Update aei93 cost=225,168,218 order=0  was ae93i cost=227,168,221 order=0
+---- sort cost=200 (1/1) increases cost 212 to 220
+New    aei9o cost=220,167,212 order=0
+---- sort cost=200 (1/1) increases cost 258 to 261
+Update aeio0 cost=261,247,258 order=0  was aei0o cost=280,247,277 order=0
+---- sort cost=200 (1/1) increases cost 209 to 218
+Update aeio9 cost=218,167,209 order=0  was aei9o cost=220,167,212 order=0
+---- after round 4 ----
+ 08b3m cost=218 nrow=151 order=0
+ 08bei cost=218 nrow=151 order=0
+ aeio9 cost=218 nrow=167 order=0
+ 08b3e cost=220 nrow=151 order=0
+ aei93 cost=225 nrow=168 order=0
+ ae93m cost=227 nrow=168 order=0
+ aeio0 cost=261 nrow=247 order=0
+---- sort cost=200 (1/1) increases cost 213 to 221
+New    08b3ei cost=221,151,213 order=0
+---- sort cost=200 (1/1) increases cost 213 to 221
+New    08b3em cost=221,151,213 order=0
+---- sort cost=200 (1/1) increases cost 213 to 221
+Skip   08b3me cost=221,151,213 order=0   vs 08b3em cost=221,151,213 order=0
+---- sort cost=200 (1/1) increases cost 213 to 221
+Skip   08bei3 cost=221,151,213 order=0   vs 08b3ei cost=221,151,213 order=0
+---- sort cost=200 (1/1) increases cost 210 to 219
+New    08beio cost=219,150,210 order=0
+---- sort cost=200 (1/1) increases cost 321 to 324
+Skip   aeio08 cost=324,296,321 order=0   vs 08beio cost=219,150,210 order=0
+---- sort cost=200 (1/1) increases cost 304 to 307
+Skip   aeio09 cost=307,270,304 order=0   vs 08beio cost=219,150,210 order=0
+---- sort cost=200 (1/1) increases cost 282 to 285
+Skip   aei930 cost=285,271,282 order=0   vs 08b3ei cost=221,151,213 order=0
+---- sort cost=200 (1/1) increases cost 225 to 230
+Skip   aei931 cost=230,167,225 order=0   vs 08b3ei cost=221,151,213 order=0
+---- sort cost=200 (1/1) increases cost 221 to 227
+New    aei93m cost=227,168,221 order=0
+---- sort cost=200 (1/1) increases cost 220 to 226
+New    aei93o cost=226,167,220 order=0
+---- sort cost=200 (1/1) increases cost 282 to 285
+Skip   ae93m0 cost=285,271,282 order=0   vs 08b3em cost=221,151,213 order=0
+---- sort cost=200 (1/1) increases cost 227 to 232
+Skip   ae93m1 cost=232,167,227 order=0   vs 08b3em cost=221,151,213 order=0
+---- sort cost=200 (1/1) increases cost 224 to 230
+Skip   ae93mi cost=230,168,224 order=0   vs aei93m cost=227,168,221 order=0
+---- sort cost=200 (1/1) increases cost 281 to 284
+Skip   aeio90 cost=284,270,281 order=0   vs 08beio cost=219,150,210 order=0
+---- sort cost=200 (1/1) increases cost 220 to 226
+Skip   aeio91 cost=226,166,220 order=0   vs 08beio cost=219,150,210 order=0
+---- sort cost=200 (1/1) increases cost 218 to 225
+Update aeio93 cost=225,167,218 order=0  was aei93o cost=226,167,220 order=0
+---- after round 5 ----
+ 08beio cost=219 nrow=150 order=0
+ 08b3ei cost=221 nrow=151 order=0
+ 08b3em cost=221 nrow=151 order=0
+ aeio93 cost=225 nrow=167 order=0
+ aei93m cost=227 nrow=168 order=0
+---- sort cost=200 (1/1) increases cost 214 to 222
+New    08b3eim cost=222,151,214 order=0
+---- sort cost=200 (1/1) increases cost 214 to 222
+New    08b3eio cost=222,150,214 order=0
+---- sort cost=200 (1/1) increases cost 214 to 222
+Skip   08b3emi cost=222,151,214 order=0   vs 08b3eim cost=222,151,214 order=0
+---- sort cost=200 (1/1) increases cost 213 to 221
+Update 08beio3 cost=221,150,213 order=0  was 08b3eio cost=222,150,214 order=0
+---- sort cost=200 (1/1) increases cost 282 to 285
+Skip   aei93m0 cost=285,271,282 order=0   vs 08b3eim cost=222,151,214 order=0
+---- sort cost=200 (1/1) increases cost 227 to 232
+Skip   aei93m1 cost=232,167,227 order=0   vs 08b3eim cost=222,151,214 order=0
+---- sort cost=200 (1/1) increases cost 223 to 229
+New    aei93mo cost=229,167,223 order=0
+---- sort cost=200 (1/1) increases cost 281 to 284
+Skip   aeio930 cost=284,270,281 order=0   vs 08beio3 cost=221,150,213 order=0
+---- sort cost=200 (1/1) increases cost 225 to 230
+Skip   aeio931 cost=230,166,225 order=0   vs 08beio3 cost=221,150,213 order=0
+---- sort cost=200 (1/1) increases cost 221 to 227
+Update aeio93m cost=227,167,221 order=0  was aei93mo cost=229,167,223 order=0
+---- after round 6 ----
+ 08beio3 cost=221 nrow=150 order=0
+ 08b3eim cost=222 nrow=151 order=0
+ aeio93m cost=227 nrow=167 order=0
+---- sort cost=200 (1/1) increases cost 215 to 222
+New    08b3eimo cost=222,150,215 order=0
+---- sort cost=200 (1/1) increases cost 214 to 222
+Update 08beio3m cost=222,150,214 order=0  was 08b3eimo cost=222,150,215 order=0
+---- sort cost=200 (1/1) increases cost 281 to 284
+Skip   aeio93m0 cost=284,270,281 order=0   vs 08beio3m cost=222,150,214 order=0
+---- sort cost=200 (1/1) increases cost 227 to 232
+Skip   aeio93m1 cost=232,166,227 order=0   vs 08beio3m cost=222,150,214 order=0
+---- after round 7 ----
+ 08beio3m cost=222 nrow=150 order=0
+---- Solution cost=222, nRow=150
+0 0.001.000         part.idx_part_type     1 f 810241 N 1 cost 0,114,103
+8 2.004.001     lineitem.idx_lineitem_partkey  1 f 010201 N 1 cost 0,74,49
+b 3.008.004       orders                     f 801101 N 1 cost 0,45,-1
+e 4.010.008     customer                     f 001101 N 1 cost 0,43,0
+i 5.020.010           n1                     f 001101 N 1 cost 0,29,0
+o 7.080.020       region                     f 801101 N 1 cost 0,24,-1
+3 1.002.004     supplier                     f 001101 N 1 cost 0,40,0
+m 6.040.002           n2                     f 001101 N 1 cost 0,29,0
+-> use Bloom-filter on loop o because there are ~3.3e+04 lookups into region which has only ~5.0e+00 rows
+*** Optimizer Finished ***
+QUERY PLAN
+|--SEARCH part USING COVERING INDEX idx_part_type (p_type=?)
+|--SEARCH lineitem USING INDEX idx_lineitem_partkey (l_partkey=?)
+|--SEARCH orders USING INTEGER PRIMARY KEY (rowid=?)
+|--SEARCH customer USING INTEGER PRIMARY KEY (rowid=?)
+|--SEARCH n1 USING INTEGER PRIMARY KEY (rowid=?)
+|--BLOOM FILTER ON region (r_regionkey=?)
+|--SEARCH region USING INTEGER PRIMARY KEY (rowid=?)
+|--SEARCH supplier USING INTEGER PRIMARY KEY (rowid=?)
+|--SEARCH n2 USING INTEGER PRIMARY KEY (rowid=?)
+`--USE TEMP B-TREE FOR GROUP BY

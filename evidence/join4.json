@@ -1,0 +1,1792 @@
+{
+  "id": "join4",
+  "title": "4 tables \u00b7 region chain",
+  "sql_file": "sql/learning/04_region_nation_customer_orders.sql",
+  "setting": "default",
+  "graph": {
+    "nodes": [
+      {
+        "id": "r",
+        "table": "region",
+        "filter": "r_name = AMERICA"
+      },
+      {
+        "id": "n",
+        "table": "nation"
+      },
+      {
+        "id": "c",
+        "table": "customer"
+      },
+      {
+        "id": "o",
+        "table": "orders"
+      }
+    ],
+    "edges": [
+      {
+        "from": "r",
+        "to": "n",
+        "predicate": "r_regionkey = n_regionkey"
+      },
+      {
+        "from": "n",
+        "to": "c",
+        "predicate": "n_nationkey = c_nationkey"
+      },
+      {
+        "from": "c",
+        "to": "o",
+        "predicate": "c_custkey = o_custkey"
+      }
+    ]
+  },
+  "sql": "-- Extend the same chain by one reference; keep the region predicate fixed.\nSELECT r.r_name, n.n_name, c.c_custkey, o.o_orderkey\nFROM region AS r\nJOIN nation AS n ON n.n_regionkey = r.r_regionkey\nJOIN customer AS c ON c.c_nationkey = n.n_nationkey\nJOIN orders AS o ON o.o_custkey = c.c_custkey\nWHERE r.r_name = 'AMERICA';\n",
+  "trace": {
+    "schema_version": 1,
+    "blocks": [
+      {
+        "id": 0,
+        "start_line": 1,
+        "loops": {
+          "0": {
+            "table_position": 0,
+            "terms": 0,
+            "setup": 0,
+            "run": 39,
+            "rows": 3,
+            "self_mask": 1,
+            "prerequisite_mask": 0,
+            "flags": 8388864,
+            "id": "0",
+            "access": "r",
+            "alias": "r",
+            "equalities": null,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 110
+          },
+          "1": {
+            "table_position": 0,
+            "terms": 1,
+            "setup": 0,
+            "run": 24,
+            "rows": -1,
+            "self_mask": 1,
+            "prerequisite_mask": 2,
+            "flags": 8392961,
+            "id": "1",
+            "access": "r",
+            "alias": "r",
+            "equalities": null,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 21
+          },
+          "2": {
+            "table_position": 1,
+            "terms": 0,
+            "setup": 0,
+            "run": 62,
+            "rows": 46,
+            "self_mask": 2,
+            "prerequisite_mask": 0,
+            "flags": 256,
+            "id": "2",
+            "access": "n",
+            "alias": "n",
+            "equalities": null,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 22
+          },
+          "3": {
+            "table_position": 1,
+            "terms": 1,
+            "setup": 0,
+            "run": 29,
+            "rows": 0,
+            "self_mask": 2,
+            "prerequisite_mask": 4,
+            "flags": 4353,
+            "id": "3",
+            "access": "n",
+            "alias": "n",
+            "equalities": null,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 23
+          },
+          "4": {
+            "table_position": 1,
+            "terms": 1,
+            "setup": 0,
+            "run": 48,
+            "rows": 23,
+            "self_mask": 2,
+            "prerequisite_mask": 1,
+            "flags": 66049,
+            "id": "4",
+            "access": "n.idx_nation_regionkey",
+            "alias": "n",
+            "equalities": 1,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 111
+          },
+          "5": {
+            "table_position": 2,
+            "terms": 0,
+            "setup": 0,
+            "run": 178,
+            "rows": 172,
+            "self_mask": 4,
+            "prerequisite_mask": 0,
+            "flags": 576,
+            "id": "5",
+            "access": "c.idx_customer_nationkey",
+            "alias": "c",
+            "equalities": 0,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 25
+          },
+          "6": {
+            "table_position": 2,
+            "terms": 1,
+            "setup": 0,
+            "run": 43,
+            "rows": 0,
+            "self_mask": 4,
+            "prerequisite_mask": 8,
+            "flags": 4353,
+            "id": "6",
+            "access": "c",
+            "alias": "c",
+            "equalities": null,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 26
+          },
+          "7": {
+            "table_position": 2,
+            "terms": 1,
+            "setup": 0,
+            "run": 131,
+            "rows": 125,
+            "self_mask": 4,
+            "prerequisite_mask": 2,
+            "flags": 66113,
+            "id": "7",
+            "access": "c.idx_customer_nationkey",
+            "alias": "c",
+            "equalities": 1,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 112
+          },
+          "8": {
+            "table_position": 2,
+            "terms": 2,
+            "setup": 0,
+            "run": 41,
+            "rows": 0,
+            "self_mask": 4,
+            "prerequisite_mask": 10,
+            "flags": 70209,
+            "id": "8",
+            "access": "c.idx_customer_nationkey",
+            "alias": "c",
+            "equalities": 2,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 28
+          },
+          "9": {
+            "table_position": 3,
+            "terms": 0,
+            "setup": 0,
+            "run": 212,
+            "rows": 205,
+            "self_mask": 8,
+            "prerequisite_mask": 0,
+            "flags": 576,
+            "id": "9",
+            "access": "o.idx_orders_custkey",
+            "alias": "o",
+            "equalities": 0,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 29
+          },
+          "a": {
+            "table_position": 3,
+            "terms": 1,
+            "setup": 0,
+            "run": 55,
+            "rows": 40,
+            "self_mask": 8,
+            "prerequisite_mask": 4,
+            "flags": 66113,
+            "id": "a",
+            "access": "o.idx_orders_custkey",
+            "alias": "o",
+            "equalities": 1,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 113
+          }
+        },
+        "passes": [
+          {
+            "id": 0,
+            "source_line": 31,
+            "row_estimate": 0,
+            "query_loop": 0,
+            "loops": {
+              "0": {
+                "table_position": 0,
+                "terms": 0,
+                "setup": 0,
+                "run": 39,
+                "rows": 3,
+                "self_mask": 1,
+                "prerequisite_mask": 0,
+                "flags": 8388864,
+                "id": "0",
+                "access": "r",
+                "alias": "r",
+                "equalities": null,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 20
+              },
+              "1": {
+                "table_position": 0,
+                "terms": 1,
+                "setup": 0,
+                "run": 24,
+                "rows": -1,
+                "self_mask": 1,
+                "prerequisite_mask": 2,
+                "flags": 8392961,
+                "id": "1",
+                "access": "r",
+                "alias": "r",
+                "equalities": null,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 21
+              },
+              "2": {
+                "table_position": 1,
+                "terms": 0,
+                "setup": 0,
+                "run": 62,
+                "rows": 46,
+                "self_mask": 2,
+                "prerequisite_mask": 0,
+                "flags": 256,
+                "id": "2",
+                "access": "n",
+                "alias": "n",
+                "equalities": null,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 22
+              },
+              "3": {
+                "table_position": 1,
+                "terms": 1,
+                "setup": 0,
+                "run": 29,
+                "rows": 0,
+                "self_mask": 2,
+                "prerequisite_mask": 4,
+                "flags": 4353,
+                "id": "3",
+                "access": "n",
+                "alias": "n",
+                "equalities": null,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 23
+              },
+              "4": {
+                "table_position": 1,
+                "terms": 1,
+                "setup": 0,
+                "run": 48,
+                "rows": 23,
+                "self_mask": 2,
+                "prerequisite_mask": 1,
+                "flags": 66049,
+                "id": "4",
+                "access": "n.idx_nation_regionkey",
+                "alias": "n",
+                "equalities": 1,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 24
+              },
+              "5": {
+                "table_position": 2,
+                "terms": 0,
+                "setup": 0,
+                "run": 178,
+                "rows": 172,
+                "self_mask": 4,
+                "prerequisite_mask": 0,
+                "flags": 576,
+                "id": "5",
+                "access": "c.idx_customer_nationkey",
+                "alias": "c",
+                "equalities": 0,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 25
+              },
+              "6": {
+                "table_position": 2,
+                "terms": 1,
+                "setup": 0,
+                "run": 43,
+                "rows": 0,
+                "self_mask": 4,
+                "prerequisite_mask": 8,
+                "flags": 4353,
+                "id": "6",
+                "access": "c",
+                "alias": "c",
+                "equalities": null,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 26
+              },
+              "7": {
+                "table_position": 2,
+                "terms": 1,
+                "setup": 0,
+                "run": 131,
+                "rows": 125,
+                "self_mask": 4,
+                "prerequisite_mask": 2,
+                "flags": 66113,
+                "id": "7",
+                "access": "c.idx_customer_nationkey",
+                "alias": "c",
+                "equalities": 1,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 27
+              },
+              "8": {
+                "table_position": 2,
+                "terms": 2,
+                "setup": 0,
+                "run": 41,
+                "rows": 0,
+                "self_mask": 4,
+                "prerequisite_mask": 10,
+                "flags": 70209,
+                "id": "8",
+                "access": "c.idx_customer_nationkey",
+                "alias": "c",
+                "equalities": 2,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 28
+              },
+              "9": {
+                "table_position": 3,
+                "terms": 0,
+                "setup": 0,
+                "run": 212,
+                "rows": 205,
+                "self_mask": 8,
+                "prerequisite_mask": 0,
+                "flags": 576,
+                "id": "9",
+                "access": "o.idx_orders_custkey",
+                "alias": "o",
+                "equalities": 0,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 29
+              },
+              "a": {
+                "table_position": 3,
+                "terms": 1,
+                "setup": 0,
+                "run": 55,
+                "rows": 40,
+                "self_mask": 8,
+                "prerequisite_mask": 4,
+                "flags": 66113,
+                "id": "a",
+                "access": "o.idx_orders_custkey",
+                "alias": "o",
+                "equalities": 1,
+                "star_delta": 0,
+                "disabled_by_interstage": false,
+                "source_line": 30
+              }
+            },
+            "rounds": [
+              {
+                "depth": 1,
+                "source_line": 36,
+                "events": [
+                  {
+                    "kind": "New",
+                    "path": "0",
+                    "cost": 40,
+                    "rows": 3,
+                    "unsorted_cost": 38,
+                    "order": "0",
+                    "source_line": 32,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "2",
+                    "cost": 62,
+                    "rows": 46,
+                    "unsorted_cost": 60,
+                    "order": "0",
+                    "source_line": 33,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "5",
+                    "cost": 178,
+                    "rows": 172,
+                    "unsorted_cost": 176,
+                    "order": "0",
+                    "source_line": 34,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "9",
+                    "cost": 212,
+                    "rows": 205,
+                    "unsorted_cost": 210,
+                    "order": "0",
+                    "source_line": 35,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  }
+                ],
+                "retained": [
+                  {
+                    "path": "0",
+                    "cost": 40,
+                    "rows": 3,
+                    "order": "0",
+                    "source_line": 37
+                  },
+                  {
+                    "path": "2",
+                    "cost": 62,
+                    "rows": 46,
+                    "order": "0",
+                    "source_line": 38
+                  },
+                  {
+                    "path": "5",
+                    "cost": 178,
+                    "rows": 172,
+                    "order": "0",
+                    "source_line": 39
+                  },
+                  {
+                    "path": "9",
+                    "cost": 212,
+                    "rows": 205,
+                    "order": "0",
+                    "source_line": 40
+                  }
+                ]
+              },
+              {
+                "depth": 2,
+                "source_line": 59,
+                "events": [
+                  {
+                    "kind": "New",
+                    "path": "02",
+                    "cost": 67,
+                    "rows": 49,
+                    "unsorted_cost": 65,
+                    "order": "0",
+                    "source_line": 41,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Update",
+                    "path": "04",
+                    "cost": 56,
+                    "rows": 26,
+                    "unsorted_cost": 54,
+                    "order": "0",
+                    "source_line": 42,
+                    "comparison": {
+                      "relation": "was",
+                      "path": "02",
+                      "cost": 67,
+                      "rows": 49,
+                      "unsorted_cost": 65,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "05",
+                    "cost": 181,
+                    "rows": 175,
+                    "unsorted_cost": 179,
+                    "order": "0",
+                    "source_line": 43,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "09",
+                    "cost": 215,
+                    "rows": 208,
+                    "unsorted_cost": 213,
+                    "order": "0",
+                    "source_line": 44,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "20",
+                    "cost": 87,
+                    "rows": 49,
+                    "unsorted_cost": 85,
+                    "order": "0",
+                    "source_line": 45,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "04",
+                      "cost": 56,
+                      "rows": 26,
+                      "unsorted_cost": 54,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "21",
+                    "cost": 76,
+                    "rows": 45,
+                    "unsorted_cost": 74,
+                    "order": "0",
+                    "source_line": 46,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "04",
+                      "cost": 56,
+                      "rows": 26,
+                      "unsorted_cost": 54,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "25",
+                    "cost": 224,
+                    "rows": 218,
+                    "unsorted_cost": 222,
+                    "order": "0",
+                    "source_line": 47,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Update",
+                    "path": "27",
+                    "cost": 177,
+                    "rows": 171,
+                    "unsorted_cost": 175,
+                    "order": "0",
+                    "source_line": 48,
+                    "comparison": {
+                      "relation": "was",
+                      "path": "25",
+                      "cost": 224,
+                      "rows": 218,
+                      "unsorted_cost": 222,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "29",
+                    "cost": 258,
+                    "rows": 251,
+                    "unsorted_cost": 256,
+                    "order": "0",
+                    "source_line": 49,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "50",
+                    "cost": 212,
+                    "rows": 175,
+                    "unsorted_cost": 210,
+                    "order": "0",
+                    "source_line": 50,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "05",
+                      "cost": 181,
+                      "rows": 175,
+                      "unsorted_cost": 179,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "52",
+                    "cost": 234,
+                    "rows": 218,
+                    "unsorted_cost": 232,
+                    "order": "0",
+                    "source_line": 51,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "27",
+                      "cost": 177,
+                      "rows": 171,
+                      "unsorted_cost": 175,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "53",
+                    "cost": 203,
+                    "rows": 172,
+                    "unsorted_cost": 201,
+                    "order": "0",
+                    "source_line": 52,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "27",
+                      "cost": 177,
+                      "rows": 171,
+                      "unsorted_cost": 175,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "59",
+                    "cost": 384,
+                    "rows": 377,
+                    "unsorted_cost": 382,
+                    "order": "0",
+                    "source_line": 53,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Update",
+                    "path": "5a",
+                    "cost": 227,
+                    "rows": 212,
+                    "unsorted_cost": 225,
+                    "order": "0",
+                    "source_line": 54,
+                    "comparison": {
+                      "relation": "was",
+                      "path": "59",
+                      "cost": 384,
+                      "rows": 377,
+                      "unsorted_cost": 382,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "90",
+                    "cost": 245,
+                    "rows": 208,
+                    "unsorted_cost": 243,
+                    "order": "0",
+                    "source_line": 55,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "09",
+                      "cost": 215,
+                      "rows": 208,
+                      "unsorted_cost": 213,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "92",
+                    "cost": 267,
+                    "rows": 251,
+                    "unsorted_cost": 265,
+                    "order": "0",
+                    "source_line": 56,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "29",
+                      "cost": 258,
+                      "rows": 251,
+                      "unsorted_cost": 256,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "95",
+                    "cost": 383,
+                    "rows": 377,
+                    "unsorted_cost": 381,
+                    "order": "0",
+                    "source_line": 57,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "5a",
+                      "cost": 227,
+                      "rows": 212,
+                      "unsorted_cost": 225,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "96",
+                    "cost": 249,
+                    "rows": 205,
+                    "unsorted_cost": 247,
+                    "order": "0",
+                    "source_line": 58,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "5a",
+                      "cost": 227,
+                      "rows": 212,
+                      "unsorted_cost": 225,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  }
+                ],
+                "retained": [
+                  {
+                    "path": "04",
+                    "cost": 56,
+                    "rows": 26,
+                    "order": "0",
+                    "source_line": 60
+                  },
+                  {
+                    "path": "27",
+                    "cost": 177,
+                    "rows": 171,
+                    "order": "0",
+                    "source_line": 61
+                  },
+                  {
+                    "path": "05",
+                    "cost": 181,
+                    "rows": 175,
+                    "order": "0",
+                    "source_line": 62
+                  },
+                  {
+                    "path": "09",
+                    "cost": 215,
+                    "rows": 208,
+                    "order": "0",
+                    "source_line": 63
+                  },
+                  {
+                    "path": "5a",
+                    "cost": 227,
+                    "rows": 212,
+                    "order": "0",
+                    "source_line": 64
+                  },
+                  {
+                    "path": "29",
+                    "cost": 258,
+                    "rows": 251,
+                    "order": "0",
+                    "source_line": 65
+                  }
+                ]
+              },
+              {
+                "depth": 3,
+                "source_line": 91,
+                "events": [
+                  {
+                    "kind": "New",
+                    "path": "045",
+                    "cost": 204,
+                    "rows": 198,
+                    "unsorted_cost": 202,
+                    "order": "0",
+                    "source_line": 66,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Update",
+                    "path": "047",
+                    "cost": 157,
+                    "rows": 151,
+                    "unsorted_cost": 155,
+                    "order": "0",
+                    "source_line": 67,
+                    "comparison": {
+                      "relation": "was",
+                      "path": "045",
+                      "cost": 204,
+                      "rows": 198,
+                      "unsorted_cost": 202,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "049",
+                    "cost": 238,
+                    "rows": 231,
+                    "unsorted_cost": 236,
+                    "order": "0",
+                    "source_line": 68,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "052",
+                    "cost": 237,
+                    "rows": 221,
+                    "unsorted_cost": 235,
+                    "order": "0",
+                    "source_line": 69,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047",
+                      "cost": 157,
+                      "rows": 151,
+                      "unsorted_cost": 155,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "053",
+                    "cost": 206,
+                    "rows": 175,
+                    "unsorted_cost": 204,
+                    "order": "0",
+                    "source_line": 70,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047",
+                      "cost": 157,
+                      "rows": 151,
+                      "unsorted_cost": 155,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "054",
+                    "cost": 224,
+                    "rows": 198,
+                    "unsorted_cost": 222,
+                    "order": "0",
+                    "source_line": 71,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047",
+                      "cost": 157,
+                      "rows": 151,
+                      "unsorted_cost": 155,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "059",
+                    "cost": 387,
+                    "rows": 380,
+                    "unsorted_cost": 385,
+                    "order": "0",
+                    "source_line": 72,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Update",
+                    "path": "05a",
+                    "cost": 230,
+                    "rows": 215,
+                    "unsorted_cost": 228,
+                    "order": "0",
+                    "source_line": 73,
+                    "comparison": {
+                      "relation": "was",
+                      "path": "059",
+                      "cost": 387,
+                      "rows": 380,
+                      "unsorted_cost": 385,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "092",
+                    "cost": 270,
+                    "rows": 254,
+                    "unsorted_cost": 268,
+                    "order": "0",
+                    "source_line": 74,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "049",
+                      "cost": 238,
+                      "rows": 231,
+                      "unsorted_cost": 236,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "094",
+                    "cost": 257,
+                    "rows": 231,
+                    "unsorted_cost": 255,
+                    "order": "0",
+                    "source_line": 75,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "049",
+                      "cost": 238,
+                      "rows": 231,
+                      "unsorted_cost": 236,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "095",
+                    "cost": 386,
+                    "rows": 380,
+                    "unsorted_cost": 384,
+                    "order": "0",
+                    "source_line": 76,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "05a",
+                      "cost": 230,
+                      "rows": 215,
+                      "unsorted_cost": 228,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "096",
+                    "cost": 252,
+                    "rows": 208,
+                    "unsorted_cost": 250,
+                    "order": "0",
+                    "source_line": 77,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "05a",
+                      "cost": 230,
+                      "rows": 215,
+                      "unsorted_cost": 228,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "270",
+                    "cost": 211,
+                    "rows": 174,
+                    "unsorted_cost": 209,
+                    "order": "0",
+                    "source_line": 78,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047",
+                      "cost": 157,
+                      "rows": 151,
+                      "unsorted_cost": 155,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "271",
+                    "cost": 198,
+                    "rows": 170,
+                    "unsorted_cost": 196,
+                    "order": "0",
+                    "source_line": 79,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047",
+                      "cost": 157,
+                      "rows": 151,
+                      "unsorted_cost": 155,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "New",
+                    "path": "279",
+                    "cost": 383,
+                    "rows": 376,
+                    "unsorted_cost": 381,
+                    "order": "0",
+                    "source_line": 80,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Update",
+                    "path": "27a",
+                    "cost": 226,
+                    "rows": 211,
+                    "unsorted_cost": 224,
+                    "order": "0",
+                    "source_line": 81,
+                    "comparison": {
+                      "relation": "was",
+                      "path": "279",
+                      "cost": 383,
+                      "rows": 376,
+                      "unsorted_cost": 381,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "290",
+                    "cost": 291,
+                    "rows": 254,
+                    "unsorted_cost": 289,
+                    "order": "0",
+                    "source_line": 82,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "049",
+                      "cost": 238,
+                      "rows": 231,
+                      "unsorted_cost": 236,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "291",
+                    "cost": 278,
+                    "rows": 250,
+                    "unsorted_cost": 276,
+                    "order": "0",
+                    "source_line": 83,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "049",
+                      "cost": 238,
+                      "rows": 231,
+                      "unsorted_cost": 236,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "295",
+                    "cost": 429,
+                    "rows": 423,
+                    "unsorted_cost": 427,
+                    "order": "0",
+                    "source_line": 84,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "27a",
+                      "cost": 226,
+                      "rows": 211,
+                      "unsorted_cost": 224,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "296",
+                    "cost": 295,
+                    "rows": 251,
+                    "unsorted_cost": 293,
+                    "order": "0",
+                    "source_line": 85,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "27a",
+                      "cost": 226,
+                      "rows": 211,
+                      "unsorted_cost": 224,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "297",
+                    "cost": 382,
+                    "rows": 376,
+                    "unsorted_cost": 380,
+                    "order": "0",
+                    "source_line": 86,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "27a",
+                      "cost": 226,
+                      "rows": 211,
+                      "unsorted_cost": 224,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "298",
+                    "cost": 293,
+                    "rows": 251,
+                    "unsorted_cost": 291,
+                    "order": "0",
+                    "source_line": 87,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "27a",
+                      "cost": 226,
+                      "rows": 211,
+                      "unsorted_cost": 224,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "5a0",
+                    "cost": 253,
+                    "rows": 215,
+                    "unsorted_cost": 251,
+                    "order": "0",
+                    "source_line": 88,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "05a",
+                      "cost": 230,
+                      "rows": 215,
+                      "unsorted_cost": 228,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "5a2",
+                    "cost": 275,
+                    "rows": 258,
+                    "unsorted_cost": 273,
+                    "order": "0",
+                    "source_line": 89,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "27a",
+                      "cost": 226,
+                      "rows": 211,
+                      "unsorted_cost": 224,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "5a3",
+                    "cost": 245,
+                    "rows": 212,
+                    "unsorted_cost": 243,
+                    "order": "0",
+                    "source_line": 90,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "27a",
+                      "cost": 226,
+                      "rows": 211,
+                      "unsorted_cost": 224,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  }
+                ],
+                "retained": [
+                  {
+                    "path": "047",
+                    "cost": 157,
+                    "rows": 151,
+                    "order": "0",
+                    "source_line": 92
+                  },
+                  {
+                    "path": "27a",
+                    "cost": 226,
+                    "rows": 211,
+                    "order": "0",
+                    "source_line": 93
+                  },
+                  {
+                    "path": "05a",
+                    "cost": 230,
+                    "rows": 215,
+                    "order": "0",
+                    "source_line": 94
+                  },
+                  {
+                    "path": "049",
+                    "cost": 238,
+                    "rows": 231,
+                    "order": "0",
+                    "source_line": 95
+                  }
+                ]
+              },
+              {
+                "depth": 4,
+                "source_line": 107,
+                "events": [
+                  {
+                    "kind": "New",
+                    "path": "0479",
+                    "cost": 363,
+                    "rows": 356,
+                    "unsorted_cost": 361,
+                    "order": "0",
+                    "source_line": 96,
+                    "reason": "entered buffer; may displace an unnamed worst path"
+                  },
+                  {
+                    "kind": "Update",
+                    "path": "047a",
+                    "cost": 206,
+                    "rows": 191,
+                    "unsorted_cost": 204,
+                    "order": "0",
+                    "source_line": 97,
+                    "comparison": {
+                      "relation": "was",
+                      "path": "0479",
+                      "cost": 363,
+                      "rows": 356,
+                      "unsorted_cost": 361,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "0495",
+                    "cost": 409,
+                    "rows": 403,
+                    "unsorted_cost": 407,
+                    "order": "0",
+                    "source_line": 98,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047a",
+                      "cost": 206,
+                      "rows": 191,
+                      "unsorted_cost": 204,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "0496",
+                    "cost": 275,
+                    "rows": 231,
+                    "unsorted_cost": 273,
+                    "order": "0",
+                    "source_line": 99,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047a",
+                      "cost": 206,
+                      "rows": 191,
+                      "unsorted_cost": 204,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "0497",
+                    "cost": 362,
+                    "rows": 356,
+                    "unsorted_cost": 360,
+                    "order": "0",
+                    "source_line": 100,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047a",
+                      "cost": 206,
+                      "rows": 191,
+                      "unsorted_cost": 204,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "0498",
+                    "cost": 273,
+                    "rows": 231,
+                    "unsorted_cost": 271,
+                    "order": "0",
+                    "source_line": 101,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047a",
+                      "cost": 206,
+                      "rows": 191,
+                      "unsorted_cost": 204,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "05a2",
+                    "cost": 278,
+                    "rows": 261,
+                    "unsorted_cost": 276,
+                    "order": "0",
+                    "source_line": 102,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047a",
+                      "cost": 206,
+                      "rows": 191,
+                      "unsorted_cost": 204,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "05a3",
+                    "cost": 248,
+                    "rows": 215,
+                    "unsorted_cost": 246,
+                    "order": "0",
+                    "source_line": 103,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047a",
+                      "cost": 206,
+                      "rows": 191,
+                      "unsorted_cost": 204,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "05a4",
+                    "cost": 264,
+                    "rows": 238,
+                    "unsorted_cost": 262,
+                    "order": "0",
+                    "source_line": 104,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047a",
+                      "cost": 206,
+                      "rows": 191,
+                      "unsorted_cost": 204,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "27a0",
+                    "cost": 252,
+                    "rows": 214,
+                    "unsorted_cost": 250,
+                    "order": "0",
+                    "source_line": 105,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047a",
+                      "cost": 206,
+                      "rows": 191,
+                      "unsorted_cost": 204,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  },
+                  {
+                    "kind": "Skip",
+                    "path": "27a1",
+                    "cost": 241,
+                    "rows": 210,
+                    "unsorted_cost": 239,
+                    "order": "0",
+                    "source_line": 106,
+                    "comparison": {
+                      "relation": "vs",
+                      "path": "047a",
+                      "cost": 206,
+                      "rows": 191,
+                      "unsorted_cost": 204,
+                      "order": "0"
+                    },
+                    "reason": "competing path for same subset and compatible ordering"
+                  }
+                ],
+                "retained": [
+                  {
+                    "path": "047a",
+                    "cost": 206,
+                    "rows": 191,
+                    "order": "0",
+                    "source_line": 108
+                  }
+                ]
+              }
+            ],
+            "path_limit": 12
+          }
+        ],
+        "access_events": [
+          {
+            "source_line": 2,
+            "raw": "    add: * 0.01.00            r                     f 004000 N 1 cost 63,45,43"
+          },
+          {
+            "source_line": 3,
+            "raw": "replace: * 0.01.00            r                     f 004000 N 1 cost 63,45,43"
+          },
+          {
+            "source_line": 4,
+            "raw": "   with: * 0.01.00            r                     f 800100 N 0 cost 0,39,3"
+          },
+          {
+            "source_line": 5,
+            "raw": "    add: * 0.01.02            r                     f 801101 N 1 cost 0,24,-1"
+          },
+          {
+            "source_line": 6,
+            "raw": "    add: * 1.02.00            n                     f 000100 N 0 cost 0,62,46"
+          },
+          {
+            "source_line": 7,
+            "raw": "    add: * 1.02.04            n                     f 001101 N 1 cost 0,29,0"
+          },
+          {
+            "source_line": 8,
+            "raw": "    add: * 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23"
+          },
+          {
+            "source_line": 9,
+            "raw": "   skip: * 1.02.05            n.idx_nation_regionkey  2 f 011201 N 2 cost 0,32,0"
+          },
+          {
+            "source_line": 10,
+            "raw": "    add: * 2.04.00            c                     f 000100 N 0 cost 0,188,172"
+          },
+          {
+            "source_line": 11,
+            "raw": "    add: * 2.04.08            c                     f 001101 N 1 cost 0,43,0"
+          },
+          {
+            "source_line": 12,
+            "raw": "replace: * 2.04.00            c                     f 000100 N 0 cost 0,188,172"
+          },
+          {
+            "source_line": 13,
+            "raw": "   with: * 2.04.00            c.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172"
+          },
+          {
+            "source_line": 14,
+            "raw": "    add: * 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125"
+          },
+          {
+            "source_line": 15,
+            "raw": "    add: * 2.04.0a            c.idx_customer_nationkey  2 f 011241 N 2 cost 0,41,0"
+          },
+          {
+            "source_line": 16,
+            "raw": "    add: * 3.08.00            o                     f 000100 N 0 cost 0,221,205"
+          },
+          {
+            "source_line": 17,
+            "raw": "replace: * 3.08.00            o                     f 000100 N 0 cost 0,221,205"
+          },
+          {
+            "source_line": 18,
+            "raw": "   with: * 3.08.00            o.idx_orders_custkey  0 f 000240 N 0 cost 0,212,205"
+          },
+          {
+            "source_line": 19,
+            "raw": "    add: * 3.08.04            o.idx_orders_custkey  1 f 010241 N 1 cost 0,55,40"
+          }
+        ],
+        "annotations": [],
+        "star_applied": false,
+        "solution": {
+          "cost": 206,
+          "rows": 191,
+          "source_line": 109,
+          "path": "047a"
+        },
+        "solution_loops": [
+          {
+            "table_position": 0,
+            "terms": 0,
+            "setup": 0,
+            "run": 39,
+            "rows": 3,
+            "self_mask": 1,
+            "prerequisite_mask": 0,
+            "flags": 8388864,
+            "id": "0",
+            "access": "r",
+            "alias": "r",
+            "equalities": null,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 110
+          },
+          {
+            "table_position": 1,
+            "terms": 1,
+            "setup": 0,
+            "run": 48,
+            "rows": 23,
+            "self_mask": 2,
+            "prerequisite_mask": 1,
+            "flags": 66049,
+            "id": "4",
+            "access": "n.idx_nation_regionkey",
+            "alias": "n",
+            "equalities": 1,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 111
+          },
+          {
+            "table_position": 2,
+            "terms": 1,
+            "setup": 0,
+            "run": 131,
+            "rows": 125,
+            "self_mask": 4,
+            "prerequisite_mask": 2,
+            "flags": 66113,
+            "id": "7",
+            "access": "c.idx_customer_nationkey",
+            "alias": "c",
+            "equalities": 1,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 112
+          },
+          {
+            "table_position": 3,
+            "terms": 1,
+            "setup": 0,
+            "run": 55,
+            "rows": 40,
+            "self_mask": 8,
+            "prerequisite_mask": 4,
+            "flags": 66113,
+            "id": "a",
+            "access": "o.idx_orders_custkey",
+            "alias": "o",
+            "equalities": 1,
+            "star_delta": 0,
+            "disabled_by_interstage": false,
+            "source_line": 113
+          }
+        ],
+        "end_line": 114,
+        "table_count": 4,
+        "path_limit": 12,
+        "path_limit_basis": "Pinned wherePathSolver/computeMxChoice source and observed heuristic flag",
+        "event_counts": {
+          "New": 15,
+          "Update": 7,
+          "Skip": 36
+        }
+      }
+    ],
+    "eqp": [
+      "|--SCAN r",
+      "|--SEARCH n USING INDEX idx_nation_regionkey (n_regionkey=?)",
+      "|--SEARCH c USING COVERING INDEX idx_customer_nationkey (c_nationkey=?)",
+      "`--SEARCH o USING COVERING INDEX idx_orders_custkey (o_custkey=?)"
+    ],
+    "raw_lines": [
+      "*** Optimizer Start *** (wctrlFlags: 0x0)",
+      "    add: * 0.01.00            r                     f 004000 N 1 cost 63,45,43",
+      "replace: * 0.01.00            r                     f 004000 N 1 cost 63,45,43",
+      "   with: * 0.01.00            r                     f 800100 N 0 cost 0,39,3",
+      "    add: * 0.01.02            r                     f 801101 N 1 cost 0,24,-1",
+      "    add: * 1.02.00            n                     f 000100 N 0 cost 0,62,46",
+      "    add: * 1.02.04            n                     f 001101 N 1 cost 0,29,0",
+      "    add: * 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23",
+      "   skip: * 1.02.05            n.idx_nation_regionkey  2 f 011201 N 2 cost 0,32,0",
+      "    add: * 2.04.00            c                     f 000100 N 0 cost 0,188,172",
+      "    add: * 2.04.08            c                     f 001101 N 1 cost 0,43,0",
+      "replace: * 2.04.00            c                     f 000100 N 0 cost 0,188,172",
+      "   with: * 2.04.00            c.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172",
+      "    add: * 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125",
+      "    add: * 2.04.0a            c.idx_customer_nationkey  2 f 011241 N 2 cost 0,41,0",
+      "    add: * 3.08.00            o                     f 000100 N 0 cost 0,221,205",
+      "replace: * 3.08.00            o                     f 000100 N 0 cost 0,221,205",
+      "   with: * 3.08.00            o.idx_orders_custkey  0 f 000240 N 0 cost 0,212,205",
+      "    add: * 3.08.04            o.idx_orders_custkey  1 f 010241 N 1 cost 0,55,40",
+      "0 0.01.00            r                     f 800100 N 0 cost 0,39,3",
+      "1 0.01.02            r                     f 801101 N 1 cost 0,24,-1",
+      "2 1.02.00            n                     f 000100 N 0 cost 0,62,46",
+      "3 1.02.04            n                     f 001101 N 1 cost 0,29,0",
+      "4 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23",
+      "5 2.04.00            c.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172",
+      "6 2.04.08            c                     f 001101 N 1 cost 0,43,0",
+      "7 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125",
+      "8 2.04.0a            c.idx_customer_nationkey  2 f 011241 N 2 cost 0,41,0",
+      "9 3.08.00            o.idx_orders_custkey  0 f 000240 N 0 cost 0,212,205",
+      "a 3.08.04            o.idx_orders_custkey  1 f 010241 N 1 cost 0,55,40",
+      "---- begin solver.  (nRowEst=0, nQueryLoop=0)",
+      "New    0 cost=40 ,  3, 38 order=0",
+      "New    2 cost=62 , 46, 60 order=0",
+      "New    5 cost=178,172,176 order=0",
+      "New    9 cost=212,205,210 order=0",
+      "---- after round 0 ----",
+      " 0 cost=40  nrow=3   order=0",
+      " 2 cost=62  nrow=46  order=0",
+      " 5 cost=178 nrow=172 order=0",
+      " 9 cost=212 nrow=205 order=0",
+      "New    02 cost=67 , 49, 65 order=0",
+      "Update 04 cost=56 , 26, 54 order=0  was 02 cost=67 , 49, 65 order=0",
+      "New    05 cost=181,175,179 order=0",
+      "New    09 cost=215,208,213 order=0",
+      "Skip   20 cost=87 , 49, 85 order=0   vs 04 cost=56 , 26, 54 order=0",
+      "Skip   21 cost=76 , 45, 74 order=0   vs 04 cost=56 , 26, 54 order=0",
+      "New    25 cost=224,218,222 order=0",
+      "Update 27 cost=177,171,175 order=0  was 25 cost=224,218,222 order=0",
+      "New    29 cost=258,251,256 order=0",
+      "Skip   50 cost=212,175,210 order=0   vs 05 cost=181,175,179 order=0",
+      "Skip   52 cost=234,218,232 order=0   vs 27 cost=177,171,175 order=0",
+      "Skip   53 cost=203,172,201 order=0   vs 27 cost=177,171,175 order=0",
+      "New    59 cost=384,377,382 order=0",
+      "Update 5a cost=227,212,225 order=0  was 59 cost=384,377,382 order=0",
+      "Skip   90 cost=245,208,243 order=0   vs 09 cost=215,208,213 order=0",
+      "Skip   92 cost=267,251,265 order=0   vs 29 cost=258,251,256 order=0",
+      "Skip   95 cost=383,377,381 order=0   vs 5a cost=227,212,225 order=0",
+      "Skip   96 cost=249,205,247 order=0   vs 5a cost=227,212,225 order=0",
+      "---- after round 1 ----",
+      " 04 cost=56  nrow=26  order=0",
+      " 27 cost=177 nrow=171 order=0",
+      " 05 cost=181 nrow=175 order=0",
+      " 09 cost=215 nrow=208 order=0",
+      " 5a cost=227 nrow=212 order=0",
+      " 29 cost=258 nrow=251 order=0",
+      "New    045 cost=204,198,202 order=0",
+      "Update 047 cost=157,151,155 order=0  was 045 cost=204,198,202 order=0",
+      "New    049 cost=238,231,236 order=0",
+      "Skip   052 cost=237,221,235 order=0   vs 047 cost=157,151,155 order=0",
+      "Skip   053 cost=206,175,204 order=0   vs 047 cost=157,151,155 order=0",
+      "Skip   054 cost=224,198,222 order=0   vs 047 cost=157,151,155 order=0",
+      "New    059 cost=387,380,385 order=0",
+      "Update 05a cost=230,215,228 order=0  was 059 cost=387,380,385 order=0",
+      "Skip   092 cost=270,254,268 order=0   vs 049 cost=238,231,236 order=0",
+      "Skip   094 cost=257,231,255 order=0   vs 049 cost=238,231,236 order=0",
+      "Skip   095 cost=386,380,384 order=0   vs 05a cost=230,215,228 order=0",
+      "Skip   096 cost=252,208,250 order=0   vs 05a cost=230,215,228 order=0",
+      "Skip   270 cost=211,174,209 order=0   vs 047 cost=157,151,155 order=0",
+      "Skip   271 cost=198,170,196 order=0   vs 047 cost=157,151,155 order=0",
+      "New    279 cost=383,376,381 order=0",
+      "Update 27a cost=226,211,224 order=0  was 279 cost=383,376,381 order=0",
+      "Skip   290 cost=291,254,289 order=0   vs 049 cost=238,231,236 order=0",
+      "Skip   291 cost=278,250,276 order=0   vs 049 cost=238,231,236 order=0",
+      "Skip   295 cost=429,423,427 order=0   vs 27a cost=226,211,224 order=0",
+      "Skip   296 cost=295,251,293 order=0   vs 27a cost=226,211,224 order=0",
+      "Skip   297 cost=382,376,380 order=0   vs 27a cost=226,211,224 order=0",
+      "Skip   298 cost=293,251,291 order=0   vs 27a cost=226,211,224 order=0",
+      "Skip   5a0 cost=253,215,251 order=0   vs 05a cost=230,215,228 order=0",
+      "Skip   5a2 cost=275,258,273 order=0   vs 27a cost=226,211,224 order=0",
+      "Skip   5a3 cost=245,212,243 order=0   vs 27a cost=226,211,224 order=0",
+      "---- after round 2 ----",
+      " 047 cost=157 nrow=151 order=0",
+      " 27a cost=226 nrow=211 order=0",
+      " 05a cost=230 nrow=215 order=0",
+      " 049 cost=238 nrow=231 order=0",
+      "New    0479 cost=363,356,361 order=0",
+      "Update 047a cost=206,191,204 order=0  was 0479 cost=363,356,361 order=0",
+      "Skip   0495 cost=409,403,407 order=0   vs 047a cost=206,191,204 order=0",
+      "Skip   0496 cost=275,231,273 order=0   vs 047a cost=206,191,204 order=0",
+      "Skip   0497 cost=362,356,360 order=0   vs 047a cost=206,191,204 order=0",
+      "Skip   0498 cost=273,231,271 order=0   vs 047a cost=206,191,204 order=0",
+      "Skip   05a2 cost=278,261,276 order=0   vs 047a cost=206,191,204 order=0",
+      "Skip   05a3 cost=248,215,246 order=0   vs 047a cost=206,191,204 order=0",
+      "Skip   05a4 cost=264,238,262 order=0   vs 047a cost=206,191,204 order=0",
+      "Skip   27a0 cost=252,214,250 order=0   vs 047a cost=206,191,204 order=0",
+      "Skip   27a1 cost=241,210,239 order=0   vs 047a cost=206,191,204 order=0",
+      "---- after round 3 ----",
+      " 047a cost=206 nrow=191 order=0",
+      "---- Solution cost=206, nRow=191",
+      "0 0.01.00            r                     f 800100 N 0 cost 0,39,3",
+      "4 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23",
+      "7 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125",
+      "a 3.08.04            o.idx_orders_custkey  1 f 010241 N 1 cost 0,55,40",
+      "*** Optimizer Finished ***",
+      "QUERY PLAN",
+      "|--SCAN r",
+      "|--SEARCH n USING INDEX idx_nation_regionkey (n_regionkey=?)",
+      "|--SEARCH c USING COVERING INDEX idx_customer_nationkey (c_nationkey=?)",
+      "`--SEARCH o USING COVERING INDEX idx_orders_custkey (o_custkey=?)"
+    ]
+  }
+}

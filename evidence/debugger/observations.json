@@ -1,0 +1,60 @@
+[
+  {
+    "run": "join3",
+    "solver_stops": [
+      {
+        "nLoop": 3,
+        "mxChoice": 12,
+        "nRowEst": 0,
+        "nOrderBy": 0,
+        "star": 0
+      }
+    ],
+    "replacement": [
+      "PROJECT_REPLACEMENT depth=2 candidate=04 old=02 newCost=56 oldCost=67"
+    ],
+    "log_file": "evidence/debugger/join3.txt"
+  },
+  {
+    "run": "q8_default",
+    "solver_stops": [
+      {
+        "nLoop": 8,
+        "mxChoice": 18,
+        "nRowEst": 0,
+        "nOrderBy": 0,
+        "star": 1
+      },
+      {
+        "nLoop": 8,
+        "mxChoice": 18,
+        "nRowEst": 151,
+        "nOrderBy": 1,
+        "star": 1
+      }
+    ],
+    "replacement": [],
+    "log_file": "evidence/debugger/q8_default.txt"
+  },
+  {
+    "run": "q8_starquery_disabled",
+    "solver_stops": [
+      {
+        "nLoop": 8,
+        "mxChoice": 12,
+        "nRowEst": 0,
+        "nOrderBy": 0,
+        "star": 0
+      },
+      {
+        "nLoop": 8,
+        "mxChoice": 12,
+        "nRowEst": 151,
+        "nOrderBy": 1,
+        "star": 0
+      }
+    ],
+    "replacement": [],
+    "log_file": "evidence/debugger/q8_starquery_disabled.txt"
+  }
+]

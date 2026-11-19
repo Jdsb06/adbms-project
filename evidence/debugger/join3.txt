@@ -1,0 +1,39 @@
+Breakpoint 1 at 0x1cbfe6: file /home/jdsb/Desktop/IIITB/SEM5_IIITB/ADBMS/project/adbms-project/src/sqlite-src-3540100/src/where.c, line 5903.
+Breakpoint 2 at 0x1ccb34: file /home/jdsb/Desktop/IIITB/SEM5_IIITB/ADBMS/project/adbms-project/src/sqlite-src-3540100/src/where.c, line 6116.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/usr/lib/x86_64-linux-gnu/libthread_db.so.1".
+1
+*** Optimizer Start *** (wctrlFlags: 0x0)
+0 0.01.00            r                     f 800100 N 0 cost 0,39,3
+1 0.01.02            r                     f 801101 N 1 cost 0,24,-1
+2 1.02.00            n                     f 000100 N 0 cost 0,62,46
+3 1.02.04            n                     f 001101 N 1 cost 0,29,0
+4 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23
+5 2.04.00            c.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172
+6 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125
+PROJECT_SOLVER nLoop=3 mxChoice=12 nRowEst=0 nOrderBy=0 star=0
+#0  wherePathSolver (pWInfo=0x5555557d7728, nRowEst=0) at /home/jdsb/Desktop/IIITB/SEM5_IIITB/ADBMS/project/adbms-project/src/sqlite-src-3540100/src/where.c:5903
+#1  0x0000555555723558 in sqlite3WhereBegin (pParse=0x7fffffffb850, pTabList=0x5555557cf648, pWhere=0x5555557cc768, pOrderBy=0x0, pResultSet=0x5555557cfcf8, pSelect=0x5555557ce388, wctrlFlags=0, iAuxArg=320) at /home/jdsb/Desktop/IIITB/SEM5_IIITB/ADBMS/project/adbms-project/src/sqlite-src-3540100/src/where.c:7115
+#2  0x00005555556aee45 in sqlite3Select (pParse=0x7fffffffb850, p=0x5555557ce388, pDest=0x7fffffffb680) at /home/jdsb/Desktop/IIITB/SEM5_IIITB/ADBMS/project/adbms-project/src/sqlite-src-3540100/src/select.c:8443
+#3  0x0000555555674ec7 in yy_reduce (yypParser=0x5555557d34e8, yyruleno=84, yyLookahead=1, yyLookaheadToken=..., pParse=0x7fffffffb850) at /home/jdsb/Desktop/IIITB/SEM5_IIITB/ADBMS/project/adbms-project/build/sqlite-debug/parse.y:525
+#4  0x000055555567b8c0 in sqlite3Parser (yyp=0x5555557d34e8, yymajor=1, yyminor=...) at parse.c:6198
+$1 = 1
+$2 = 0
+$3 = 0
+$4 = 39
+$5 = 3
+PROJECT_REPLACEMENT depth=2 candidate=04 old=02 newCost=56 oldCost=67
+$6 = 1
+$7 = 1
+$8 = 48
+$9 = 3
+---- Solution cost=157, nRow=151
+0 0.01.00            r                     f 800100 N 0 cost 0,39,3
+4 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23
+6 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125
+*** Optimizer Finished ***
+QUERY PLAN
+|--SCAN r
+|--SEARCH n USING INDEX idx_nation_regionkey (n_regionkey=?)
+`--SEARCH c USING COVERING INDEX idx_customer_nationkey (c_nationkey=?)
+[Inferior 1 (process 196957) exited normally]

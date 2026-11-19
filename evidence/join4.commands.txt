@@ -1,0 +1,14 @@
+.bail on
+SELECT 1 FROM sqlite_stat1 LIMIT 1;
+.wheretrace 0x001c008e
+.print ===PROJECT_TRACE_BEGIN===
+EXPLAIN QUERY PLAN
+-- Extend the same chain by one reference; keep the region predicate fixed.
+SELECT r.r_name, n.n_name, c.c_custkey, o.o_orderkey
+FROM region AS r
+JOIN nation AS n ON n.n_regionkey = r.r_regionkey
+JOIN customer AS c ON c.c_nationkey = n.n_nationkey
+JOIN orders AS o ON o.o_custkey = c.c_custkey
+WHERE r.r_name = 'AMERICA';
+
+.wheretrace 0

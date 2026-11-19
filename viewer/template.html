@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>SQLite observed join search</title>
+<style>
+:root{--ink:#172b3a;--muted:#526575;--paper:#f4f6f7;--line:#dce3e8;--blue:#14638a;--teal:#08776c;--pale:#e8f5f1;--orange:#a95c16;--red:#a23d3d;--gold:#a7770a}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,select,input{font:inherit}button,select{color:var(--ink);background:white;border:1px solid #b9c8d2;border-radius:6px;padding:8px 12px}button{cursor:pointer}button:hover{background:#eef5f8}button:disabled{opacity:.4;cursor:default}button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #44a7c8;outline-offset:3px}h1,h2,h3,p{margin:0}h1{font-size:28px;letter-spacing:-.7px;line-height:1.2}h2{font-size:17px;letter-spacing:-.2px}h3{font-size:14px}code,pre,.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.9em}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;margin:10px 0 0;line-height:1.65}header{background:#142d3d;color:white;padding:26px 34px 22px}.mast{display:flex;justify-content:space-between;gap:24px;align-items:center;max-width:1600px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:10px;color:#acd7e4;margin-bottom:6px}.subtitle{color:#c0d1dc;font-size:13px;margin-top:8px}.offline{border:1px solid #587380;border-radius:20px;padding:5px 12px;font-size:11px;color:#c6e9dc;white-space:nowrap}main{max-width:1668px;margin:auto;padding:22px 34px 36px}.toolbar{display:flex;gap:18px;align-items:end;flex-wrap:wrap;margin-bottom:18px}.field{display:grid;gap:5px}.field label,.caption{color:var(--muted);font-size:11px;letter-spacing:.5px;text-transform:uppercase}.field select{min-width:190px}#run{min-width:270px}.navigation{display:flex;gap:8px;align-items:center}#round-label{min-width:105px;text-align:center;font-weight:600}.file-label{margin-left:auto;color:var(--blue);font-size:12px;cursor:pointer}#file{position:absolute;opacity:0;width:1px;height:1px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.stat{background:white;border:1px solid var(--line);border-radius:8px;padding:13px 16px}.stat strong{font-size:23px;line-height:1.15;display:block;font-weight:650;margin:3px 0}.stat span{font-size:11px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.panel{background:white;border:1px solid var(--line);border-radius:9px;padding:19px 21px;min-width:0}.graph-panel{grid-column:span 4}.plan-panel{grid-column:span 8}.search-panel{grid-column:1/-1}.events-panel{grid-column:span 7}.detail-panel{grid-column:span 5}.panel-head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:10px}.note{font-size:12px;color:var(--muted);margin:6px 0 12px}.join-order{font-size:15px;font-weight:650;line-height:1.8;color:var(--teal);margin:8px 0}.badges{display:flex;gap:6px;flex-wrap:wrap}.badge{background:#edf2f5;border-radius:4px;padding:3px 7px;font-size:11px}.badge.green{background:var(--pale);color:#075f55}.graph-wrap{width:100%;overflow:auto}#join-graph{width:100%;min-height:170px}.scroll{overflow:auto;max-height:480px;border:1px solid #edf1f4;border-radius:5px}.search-scroll{max-height:450px}#search-graph{display:block}.legend{display:flex;gap:16px;color:var(--muted);font-size:11px}.legend i{display:inline-block;width:9px;height:9px;margin-right:5px;background:#e8f5f1;border:1px solid var(--teal);border-radius:2px}.legend .gold{background:#fff6d9;border-color:var(--gold)}.legend .gray{background:#f3f5f7;border-color:#becbd4}table{border-collapse:collapse;width:100%;font-size:12px}th{text-align:left;background:#eef3f6;font-size:11px;font-weight:650;position:sticky;top:0;z-index:1}td,th{padding:8px 10px;border-bottom:1px solid #e6ebef;vertical-align:top}tbody tr{cursor:pointer}tbody tr:hover,tbody tr.selected{background:#eef7fa}td.path{max-width:250px;word-break:break-word}.event-kind{font-weight:650}.kind-Skip{color:var(--red)}.kind-Update{color:var(--blue)}.kind-New{color:var(--teal)}.small-select{padding:4px 7px;font-size:12px}.detail-title{font-size:16px;line-height:1.6;margin:8px 0}.metric-row{display:flex;gap:20px;flex-wrap:wrap;font-size:12px;margin:12px 0}.metric-row b{display:block;font-size:17px}.raw{background:#f3f6f8;border-radius:5px;padding:12px;max-height:220px;overflow:auto}.detail-loop{font-size:12px;padding:7px 0;border-bottom:1px solid #e8eef2}.detail-loop b{color:var(--blue)}details{margin-top:14px}summary{cursor:pointer;color:var(--blue);font-size:12px;font-weight:600}footer{margin-top:20px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}#error{display:none;background:#fff0ee;color:#862f2f;padding:15px;border:1px solid #dca79f;border-radius:7px;margin-bottom:16px}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.comparison>div{border-top:1px solid var(--line);padding-top:10px;font-size:12px}.comparison strong{display:block}.source-ref{color:var(--muted);font-size:11px}svg text{font-family:system-ui,-apple-system,sans-serif}svg g[role=button]{cursor:pointer}svg g[role=button]:focus{outline:none}svg g[role=button]:focus rect{stroke-width:3;stroke:#14638a}.empty{padding:18px;color:var(--muted);font-size:12px}
+@media(max-width:1000px){main{padding:18px}header{padding:24px 18px}.graph-panel,.plan-panel{grid-column:span 6}.events-panel,.detail-panel{grid-column:1/-1}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.graph-panel,.plan-panel{grid-column:1/-1}.mast{align-items:start}.offline{display:none}.toolbar{gap:12px}.field select,#run{min-width:0;width:100%}.field{width:100%}.file-label{margin-left:0}.panel{padding:15px}.panel-head{flex-wrap:wrap}.comparison{grid-template-columns:1fr}}
+@media print{header{background:white;color:#172b3a}.subtitle,.eyebrow{color:#526575}.toolbar,.file-label,footer{display:none}.panel{break-inside:avoid}.scroll{max-height:none}main{padding:0}.grid{display:block}.panel{margin-bottom:12px}.offline{display:none}}
+</style>
+<style>
+.view-controls, .expansion-controls, .branch-legend {
+  display:flex; align-items:center; gap:8px 14px; flex-wrap:wrap;
+}
+.view-controls select, .expansion-controls select { padding:5px 9px; font-size:12px; min-width:0; max-width:100%; }
+.expansion-controls label { color:var(--muted); font-size:12px; }
+.branch-legend { margin:10px 0; }
+.decision {
+  display:inline-block; border-radius:4px; padding:1px 6px; font-size:11px;
+  font-weight:650; white-space:nowrap; color:var(--decision-ink);
+  background:var(--decision-bg);
+}
+[data-kind="New"] { --decision-ink:#08675a; --decision-bg:#e0f3e9; --decision-edge:#368e78; }
+[data-kind="Update"] { --decision-ink:#185685; --decision-bg:#e4effb; --decision-edge:#5280ad; }
+[data-kind="Skip"] { --decision-ink:#952d36; --decision-bg:#fbe9eb; --decision-edge:#bd6470; }
+[data-kind="Ineligible"] { --decision-ink:#6a4314; --decision-bg:#fff2d9; --decision-edge:#a17435; }
+[data-kind="Unlogged"] { --decision-ink:#4f5d6c; --decision-bg:#eff2f5; --decision-edge:#8795a1; }
+.branch-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));
+  gap:12px; max-height:475px; overflow:auto; align-items:start; padding:2px 2px 7px;
+}
+.branch-prefix {
+  min-width:0; border:1px solid var(--line); border-radius:8px; padding:13px;
+  background:#f8fafb;
+}
+.branch-root { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+.branch-root code { background:#e6eef3; padding:2px 6px; border-radius:4px; }
+.branch-tree, .branch-leaves { list-style:none; margin:0; padding-left:15px; }
+.branch-tree { margin-top:8px; }
+.branch-order, .branch-leaf { position:relative; padding:5px 0 0 12px; }
+.branch-order::before, .branch-leaf::before {
+  content:""; position:absolute; top:0; bottom:0; left:0;
+  border-left:1px solid #a5b7c3;
+}
+.branch-order::after, .branch-leaf::after {
+  content:""; position:absolute; top:19px; left:0; width:12px;
+  border-top:1px solid #a5b7c3;
+}
+.branch-order:last-child::before, .branch-leaf:last-child::before { bottom:auto; height:19px; }
+.branch-order-title { min-height:29px; display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
+.branch-order-title strong { font-size:12px; }
+.branch-count { color:var(--muted); font-size:11px; }
+.branch-card {
+  width:100%; display:flex; align-items:center; flex-wrap:wrap; gap:5px 7px; text-align:left;
+  padding:5px 7px; border-color:#d0dbe2; border-left:3px solid var(--decision-edge);
+}
+.branch-card[aria-pressed="true"] { background:#edf6fa; box-shadow:inset 0 0 0 1px #6d9eb6; }
+.branch-card code { font-size:12px; font-weight:650; }
+.branch-method { flex-basis:100%; color:#3d5969; font-size:11px; overflow-wrap:anywhere; }
+.branch-card .branch-cost { color:var(--muted); font-size:11px; margin-left:auto; }
+.branch-outcome { font-size:11px; color:var(--muted); }
+.branch-outcome.survived { color:#08675a; font-weight:650; }
+.branch-inspector { border-top:1px solid var(--line); margin-top:13px; padding-top:11px; }
+.branch-inspector .note { margin-bottom:5px; }
+.branch-inspector .raw { margin-top:4px; }
+.path-steps { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:8px 0; }
+.path-step { display:flex; gap:6px; align-items:center; padding:4px 8px; border:1px solid var(--line); border-radius:5px; font-size:12px; }
+.path-step:last-child { background:#ebf5f9; border-color:#abc9d8; }
+.cost-comparison { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
+.cost-option { background:#f3f6f8; border-radius:6px; padding:5px 9px; font-size:12px; }
+.cost-option strong { display:block; font-size:13px; }
+.lesson, .trace-replay { border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin-bottom:12px; }
+.lesson { background:#edf6fa; border-color:#c0dae6; }
+.lesson h3 { font-size:15px; }
+.lesson .note, .trace-replay .note { margin:4px 0 0; }
+.lesson-row, .replay-row { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 14px; }
+.lesson-actions, .replay-actions { display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+.lesson-actions button, .replay-actions button { padding:5px 9px; font-size:12px; }
+.lesson-actions [data-primary], #replay-toggle[aria-expanded="true"] { background:#185e7b; border-color:#185e7b; color:white; }
+.lesson-actions [data-primary]:hover, #replay-toggle[aria-expanded="true"]:hover { background:#11455c; }
+.trace-replay { background:#f8fafb; margin-top:10px; }
+.trace-replay input { min-width:0; flex:1 1 110px; width:auto; accent-color:var(--blue); }
+.trace-counter { font-size:12px; color:var(--muted); }
+.branch-card[data-upcoming] { border-left-color:#c6d0d7; background:#f3f6f8; }
+.branch-card[data-upcoming] .decision { outline:1px dashed #a8b7c2; background:transparent; color:#526575; }
+.template-notice { margin:0 auto; max-width:720px; padding:24px; }
+.template-notice a { color:var(--blue); font-weight:650; }
+.access-key { border-top:1px solid var(--line); padding-top:10px; }
+.access-key .scroll { max-height:300px; margin-top:8px; }
+.access-key tbody tr { cursor:default; }
+.access-key tbody tr:hover { background:transparent; }
+@media(max-width:650px) {
+  .expansion-controls { align-items:flex-start; flex-direction:column; }
+  #prefix-filter { width:100%; }
+}
+</style>
+</head>
+<body>
+<header><div class="mast"><div><div class="eyebrow">ADBMS / source investigation</div><h1>SQLite observed join search</h1><p class="subtitle">Follow real planner decisions, one retained generation at a time.</p></div><div class="offline">● Offline evidence replay</div></div></header>
+<div class="template-notice" id="template-notice" hidden>
+ <p>This file is the viewer template. <a href="./index.html">Open the offline viewer with SQLite’s captured traces.</a></p>
+</div>
+<main id="viewer-main">
+<div id="error" role="alert"></div>
+<div class="toolbar">
+ <div class="field"><label for="run">Query and experiment</label><select id="run"></select></div>
+ <div class="field"><label for="pass">Solver pass</label><select id="pass"></select></div>
+ <div class="field"><label>Retained generation</label><div class="navigation"><button id="prev" aria-label="Previous round">←</button><span id="round-label" aria-live="polite"></span><button id="next" aria-label="Next round">→</button></div></div>
+ <label class="file-label" for="file">Open evidence JSON<input type="file" id="file" accept=".json,application/json"></label>
+</div>
+<div class="stats"><div class="stat"><div class="caption">Table references</div><strong id="stat-tables"></strong><span>Aliases remain separate</span></div><div class="stat"><div class="caption">Retained path limit N</div><strong id="stat-limit"></strong><span>Source-derived; verify mxChoice in GDB</span></div><div class="stat"><div class="caption">Retained this round</div><strong id="stat-retained"></strong><span>Authoritative round-end snapshot</span></div><div class="stat"><div class="caption">Logged decisions this round</div><strong id="stat-events"></strong><span id="stat-kinds"></span></div></div>
+<div class="grid">
+ <section class="panel search-panel">
+  <div class="panel-head">
+   <h2>Join search</h2>
+   <div class="view-controls">
+    <label for="search-view">Graph view</label>
+    <select id="search-view"><option value="expansion">Expand this round</option><option value="retained">Retained partial paths</option></select>
+   </div>
+  </div>
+  <div id="expansion-view">
+   <aside class="lesson" id="lesson" aria-label="Three-table walkthrough">
+    <div class="lesson-row">
+     <div>
+      <h3 id="lesson-title">Walk through three tables</h3>
+      <p class="note" id="lesson-text" aria-live="polite">Follow a region scan through an index replacement, a rejected order, and the final join path.</p>
+     </div>
+     <div class="lesson-actions">
+      <button type="button" id="lesson-start" data-primary>Start walkthrough</button>
+      <button type="button" id="lesson-back" hidden>Back</button>
+      <button type="button" id="lesson-next" data-primary hidden>Continue</button>
+      <button type="button" id="lesson-close" hidden>Exit</button>
+     </div>
+    </div>
+   </aside>
+   <div class="expansion-controls">
+    <label for="prefix-filter">Starting path</label><select id="prefix-filter"></select>
+    <label><input type="checkbox" id="include-used"> Include already used tables</label>
+    <button type="button" id="replay-toggle" aria-expanded="false" aria-controls="trace-replay">Replay decisions</button>
+   </div>
+   <div id="trace-replay" class="trace-replay" hidden>
+    <div class="replay-row">
+     <div class="replay-actions">
+      <button type="button" id="replay-back" aria-label="Previous decision">←</button>
+      <button type="button" id="replay-play">Play</button>
+      <button type="button" id="replay-next" aria-label="Next decision">→</button>
+     </div>
+     <input type="range" id="replay-position" min="1" value="1" aria-label="Logged decision position">
+     <span class="trace-counter" id="replay-counter" aria-live="polite"></span>
+    </div>
+    <p class="note">Follows the logged decisions for the selected starting paths. Retained labels come from the end of the round.</p>
+   </div>
+   <p class="note" id="expansion-summary"></p>
+   <div class="branch-legend" aria-label="Branch colors">
+    <span class="decision" data-kind="New" title="Entered the current buffer">New</span>
+    <span class="decision" data-kind="Update" title="Replaced a named competing path">Update</span>
+    <span class="decision" data-kind="Skip" title="Rejected after costing">Skip</span>
+    <span class="decision" data-kind="Ineligible" title="Screened before costing">Ineligible · inferred</span>
+    <span class="decision" data-kind="Unlogged" title="No matching logged decision or identified screen">Unlogged</span>
+   </div>
+   <div id="branch-graph" class="branch-grid" aria-label="Join order and access method branches"></div>
+   <div id="branch-inspector" class="branch-inspector" aria-live="polite"></div>
+  </div>
+  <div id="retained-view" hidden>
+   <div class="legend"><span><i></i>Current round</span><span><i class="gold"></i>Final choice</span><span><i class="gray"></i>Earlier round</span></div>
+   <p class="note">An edge connects a retained prefix to an extension that survived the next round.</p>
+   <div class="scroll search-scroll"><svg id="search-graph" role="img" aria-label="Layered retained partial paths"></svg></div>
+  </div>
+  <details class="access-key" open>
+   <summary>Access code legend</summary>
+   <p class="note" id="access-example"></p>
+   <div class="scroll"><table><thead><tr><th>Code</th><th>Access method</th><th>Required earlier tables</th></tr></thead><tbody id="access-key"></tbody></table></div>
+  </details>
+ </section>
+ <section class="panel graph-panel"><div class="panel-head"><h2>Logical join graph</h2><span class="badge">SQL predicates</span></div><div class="graph-wrap"><svg id="join-graph" role="img" aria-label="Logical join graph with distinct aliases"></svg></div><p class="note" id="graph-note"></p></section>
+ <section class="panel plan-panel"><div class="panel-head"><h2>Chosen execution order</h2><div class="badges"><span id="version" class="badge"></span><span id="heuristic" class="badge green"></span></div></div><div id="final-order" class="join-order"></div><p class="note">Outer loop → inner loop. Bloom filters and sorting are annotations, not extra joined tables.</p><pre id="eqp"></pre><div class="comparison" id="comparison"></div></section>
+ <section class="panel events-panel"><div class="panel-head"><h2>Candidate decisions</h2><select id="event-filter" class="small-select" aria-label="Filter candidate decisions"><option value="all">All logged decisions</option><option>New</option><option>Update</option><option>Skip</option></select></div><p class="note">New may replace an unnamed worst path. Update names a competing path. Skip records a considered rejection; dependency failures are not all logged.</p><div class="scroll"><table><thead><tr><th>Event</th><th>Access path and aliases</th><th>Cost</th><th>Rows</th><th>Line</th></tr></thead><tbody id="events"></tbody></table></div></section>
+ <section class="panel detail-panel"><div class="panel-head"><h2>Evidence inspector</h2><span id="detail-kind" class="badge"></span></div><div id="detail"></div></section>
+</div>
+<details><summary>SQL and run provenance</summary><pre id="sql"></pre><pre id="provenance"></pre></details>
+<details><summary>Access-method generation and heuristic messages</summary><p class="note">These belong to access-method construction and cost adjustment. They are separate from the path decisions above.</p><pre id="access-log" class="raw"></pre></details>
+<footer><span id="footer-meta"></span><span>LogEst ≈ 10 × log₂(value). Cost is an estimate, not milliseconds. No execution-time claim.</span></footer>
+</main>
+<script id="project-data" type="application/json">__PROJECT_DATA__</script>
+<script>
+'use strict';
+let bundle;
+const $=id=>document.getElementById(id), ns='http://www.w3.org/2000/svg';
+const state={run:0,pass:0,round:1,selection:null};
+function text(el,value){el.textContent=String(value??'');return el;}
+function dom(tag,attrs={},label){const el=document.createElement(tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,v);if(label!==undefined)text(el,label);return el;}
+function svg(tag,attrs={},label){const el=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,v);if(label!==undefined)text(el,label);return el;}
+function current(){const run=bundle.runs[state.run],block=run.trace.blocks[0],pass=block.passes[state.pass],round=pass.rounds[state.round];return {run,block,pass,round};}
+function labels(path,pass=current().pass){return [...path].map(id=>pass.loops[id].alias);}
+/*__EXPANSION_SCRIPT__*/
+function validateBundle(data){
+ if(data?.schema_version!==1||data?.metadata?.sqlite_version!=='3.54.1'||!Array.isArray(data.runs)||!data.runs.length)throw Error('Unsupported evidence format. Expected project schema 1 and SQLite 3.54.1.');
+ for(const run of data.runs){
+  if(!run.graph?.nodes?.length||run.trace?.blocks?.length!==1||!Array.isArray(run.trace.raw_lines)||!Array.isArray(run.trace.eqp))throw Error('Incomplete evidence run. Use scripts/capture_traces.py to create project.json.');
+  const b=run.trace.blocks[0];
+  if(!b.solution?.path||!b.loops||!b.passes?.length||!Number.isInteger(b.path_limit))throw Error('Missing solver metadata.');
+  const aliases=new Set(run.graph.nodes.map(n=>n.id)),q8Aliases=new Set(['part','lineitem','orders','customer','n1','region','supplier','n2']);
+  if(aliases.size!==b.table_count||aliases.size!==run.graph.nodes.length||aliases.size>8||[...Object.values(b.loops)].some(l=>!aliases.has(l.alias))||run.graph.edges.some(e=>!aliases.has(e.from)||!aliases.has(e.to))||(aliases.size>4&&[...aliases].some(a=>!q8Aliases.has(a))))throw Error('Unsupported or inconsistent project join graph.');
+  for(const p of b.passes){
+   if(!p.loops||p.rounds?.length!==b.table_count)throw Error('Incomplete solver pass.');
+   let parents=new Set(['']);
+   for(let i=0;i<p.rounds.length;i++){
+    const r=p.rounds[i];if(r.depth!==i+1||!Array.isArray(r.events)||!r.retained?.length||r.retained.length>b.path_limit)throw Error('Invalid retained generation.');
+    for(const row of [...r.retained,...r.events]){
+     if(typeof row.path!=='string'||row.path.length!==r.depth||!parents.has(row.path.slice(0,-1)))throw Error('Invalid path depth or parent.');
+     let mask=0;
+     for(const id of row.path){const l=p.loops[id];if(!l||l.disabled_by_interstage||(mask&l.self_mask)||(l.prerequisite_mask&~mask))throw Error('Unknown or disabled access method, repeated reference, or unmet dependency.');mask|=l.self_mask;}
+     if(!Number.isInteger(row.source_line)||!run.trace.raw_lines[row.source_line-1]?.includes(row.path))throw Error('Invalid raw trace reference.');
+    }
+    parents=new Set(r.retained.map(r=>r.path));
+   }
+  }
+  const last=b.passes.at(-1).rounds.at(-1).retained;
+  if(last.length!==1||last[0].path!==b.solution.path)throw Error('Final solution disagrees with retained evidence.');
+  const finalAliases=[...b.solution.path].map(id=>b.loops[id]?.alias),eqpAliases=run.trace.eqp.map(s=>s.match(/(?:SCAN|SEARCH) (\S+)/)?.[1]).filter(Boolean);
+  if(JSON.stringify(finalAliases)!==JSON.stringify(eqpAliases))throw Error('Final solution disagrees with EXPLAIN QUERY PLAN.');
+ }
+}
+function load(data){validateBundle(data);bundle=data;state.run=Math.max(0,bundle.runs.findIndex(r=>r.id==='join3'));state.pass=0;state.round=1;state.selection=null;const options=bundle.runs.map((r,i)=>dom('option',{value:i},r.title));$('run').replaceChildren(...options);$('run').value=state.run;$('error').style.display='none';updatePasses();render();}
+function updatePasses(){const b=bundle.runs[state.run].trace.blocks[0];state.pass=Math.min(state.pass,b.passes.length-1);$('pass').replaceChildren(...b.passes.map((p,i)=>dom('option',{value:i},`Pass ${i+1} · ${p.row_estimate===0?'without sort cost':'ordering considered'}`)));$('pass').value=state.pass;state.round=Math.min(state.round,b.passes[state.pass].rounds.length-1);}
+function renderJoinGraph(run){
+ const graph=$('join-graph');graph.replaceChildren();const count=run.graph.nodes.length,large=count>4,w=420,h=large?265:170;graph.setAttribute('viewBox',`0 0 ${w} ${h}`);
+ const positions=large?{part:[55,45],lineitem:[170,45],orders:[305,45],customer:[305,125],n1:[305,210],region:[170,210],supplier:[55,125],n2:[55,210]}:Object.fromEntries(run.graph.nodes.map((n,i)=>[n.id,[50+i*(320/(count-1)),85]]));
+ for(const edge of run.graph.edges){const [x1,y1]=positions[edge.from],[x2,y2]=positions[edge.to];const l=svg('line',{x1,y1,x2,y2,stroke:'#a0b8c5','stroke-width':2});l.append(svg('title',{},edge.predicate));graph.append(l);}
+ for(const n of run.graph.nodes){const [x,y]=positions[n.id],g=svg('g');g.append(svg('rect',{x:x-43,y:y-20,width:86,height:40,rx:7,fill:n.filter?'#e8f5f1':'#f0f4f7',stroke:n.filter?'#7db7a9':'#bdcbd4'}),svg('text',{x,y:y+4,'text-anchor':'middle','font-size':12,fill:'#172b3a','font-weight':600},n.id),svg('title',{},`${n.id} → ${n.table}${n.role?' · '+n.role:''}${n.filter?' · '+n.filter:''}`));graph.append(g);}
+ text($('graph-note'),large?'n1 is the customer nation; n2 is the supplier nation. Hover nodes and edges for filters and predicates.':'Green marks the filtered region. Hover an edge to read its equality predicate.');
+}
+function renderPaths(pass,block){
+ const graph=$('search-graph');graph.replaceChildren();const rounds=pass.rounds.slice(0,state.round+1),col=175,gap=42,maxRows=Math.max(...rounds.map(r=>r.retained.length)),width=Math.max(800,rounds.length*col+35),height=Math.max(200,maxRows*gap+66);graph.setAttribute('width',width);graph.setAttribute('height',height);graph.setAttribute('viewBox',`0 0 ${width} ${height}`);
+ const positions=new Map();rounds.forEach((r,i)=>r.retained.forEach((row,j)=>positions.set(row.path,[i*col+18,j*gap+42])));
+ rounds.forEach((r,i)=>{graph.append(svg('text',{x:i*col+24,y:22,'font-size':11,fill:'#526575'},`Depth ${r.depth} · ${r.retained.length} retained`));for(const row of r.retained){const [x,y]=positions.get(row.path),parent=positions.get(row.path.slice(0,-1));if(parent){const [px,py]=parent;graph.append(svg('path',{d:`M ${px+145} ${py+16} C ${px+163} ${py+16}, ${x-18} ${y+16}, ${x} ${y+16}`,fill:'none',stroke:'#d3dfe5'}));}}});
+ rounds.forEach((r,i)=>r.retained.forEach(row=>{const [x,y]=positions.get(row.path),final=i===pass.rounds.length-1&&row.path===block.solution.path,active=i===state.round,g=svg('g',{role:'button',tabindex:0,'aria-label':`Inspect retained path ${row.path}: ${labels(row.path).join(' then ')}`});g.append(svg('rect',{x,y,width:145,height:32,rx:5,fill:final?'#fff6d9':active?'#e8f5f1':'#f3f5f7',stroke:final?'#b68a23':active?'#55a091':'#ccd7dd'}),svg('text',{x:x+8,y:y+13,'font-size':10,fill:'#526575'},row.path),svg('text',{x:x+8,y:y+26,'font-size':11,fill:'#172b3a'},`${labels(row.path).at(-1)} · cost ${row.cost}`),svg('title',{},labels(row.path).join(' → ')));const select=()=>{state.selection={...row,kind:'Retained',pass:state.pass};renderDetail();};g.addEventListener('click',select);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}});graph.append(g);}));
+}
+function renderEvents(round){
+ const filter=$('event-filter').value,rows=round.events.filter(e=>filter==='all'||e.kind===filter),body=$('events');body.replaceChildren();
+ for(const event of rows){const tr=dom('tr',{tabindex:0,'aria-label':`Inspect ${event.kind} path ${event.path}`}),kind=dom('td',{class:`event-kind kind-${event.kind}`},event.kind),path=dom('td',{class:'path'});path.append(dom('code',{},event.path),dom('div',{},labels(event.path).join(' → ')));tr.append(kind,path,dom('td',{},event.cost),dom('td',{},event.rows),dom('td',{},event.source_line));const select=()=>{state.selection={...event,pass:state.pass};body.querySelectorAll('tr').forEach(x=>x.classList.remove('selected'));tr.classList.add('selected');renderDetail();};tr.addEventListener('click',select);tr.addEventListener('keydown',e=>{if(e.key==='Enter'){select();}});body.append(tr);}
+ if(!rows.length){const tr=dom('tr');tr.append(dom('td',{colspan:5,class:'empty'},'No decisions match this filter.'));body.append(tr);}
+}
+function renderDetail(){
+ const {run,pass,round}=current(),selection=state.selection||{...round.retained[0],kind:'Retained',pass:state.pass},p=current().block.passes[selection.pass],box=$('detail');box.replaceChildren();text($('detail-kind'),selection.kind);
+ box.append(dom('div',{class:'detail-title'},labels(selection.path,p).join(' → ')),dom('code',{},`Access-method path ${selection.path}`));
+ const metrics=dom('div',{class:'metric-row'});for(const [label,value] of [['Cost LogEst',selection.cost],['Rows LogEst',selection.rows],['Approx rows',Number(2**(selection.rows/10)).toLocaleString(undefined,{maximumFractionDigits:1})]]){const cell=dom('div',{},label);cell.append(dom('b',{},value));metrics.append(cell);}box.append(metrics);
+ const desc=selection.kind==='Retained'?'Present in the authoritative round-end snapshot.':selection.reason;box.append(dom('p',{class:'note'},desc));
+ if(selection.comparison)box.append(dom('p',{class:'note'},`${selection.comparison.relation==='was'?'Replaces':'Compared against'} ${selection.comparison.path}: ${labels(selection.comparison.path,p).join(' → ')}; cost ${selection.comparison.cost}, rows ${selection.comparison.rows}, unsorted cost ${selection.comparison.unsorted_cost}.`));
+ for(const id of selection.path){const l=p.loops[id],row=dom('div',{class:'detail-loop'});row.append(dom('b',{},`${id} · ${l.access}`),dom('span',{},`  setup ${l.setup} / run ${l.run} / rows ${l.rows}; requires mask 0x${l.prerequisite_mask.toString(16)}`));box.append(row);}
+ const line=selection.source_line;box.append(dom('p',{class:'source-ref'},`Raw trace line ${line} · ${run.id}`));const pre=dom('pre',{class:'raw'});text(pre,run.trace.raw_lines.slice(Math.max(0,line-3),line+2).map((s,i)=>`${Math.max(1,line-2)+i} ${s}`).join('\n'));box.append(pre);
+}
+function renderComparison(){const box=$('comparison');box.replaceChildren();for(const id of ['q8_default','q8_starquery_disabled']){const r=bundle.runs.find(r=>r.id===id);if(!r)continue;const b=r.trace.blocks[0],cell=dom('div');cell.append(dom('strong',{},r.setting==='default'?'Q8 default heuristic':'Q8 star heuristic disabled'),dom('span',{},`N=${b.path_limit} · New ${b.event_counts.New||0} · Update ${b.event_counts.Update||0} · Skip ${b.event_counts.Skip||0}`));box.append(cell);}}
+function render(){
+ const {run,block,pass,round}=current();text($('stat-tables'),block.table_count);text($('stat-limit'),block.path_limit);text($('stat-retained'),round.retained.length);text($('stat-events'),round.events.length);text($('stat-kinds'),['New','Update','Skip'].map(k=>`${round.events.filter(e=>e.kind===k).length} ${k}`).join(' · '));text($('round-label'),`${round.depth} / ${pass.rounds.length} tables`);$('prev').disabled=state.round===0;$('next').disabled=state.round===pass.rounds.length-1;text($('version'),`SQLite ${bundle.metadata.sqlite_version}`);text($('heuristic'),block.star_applied?'Star cost adjustment active':'No star cost adjustment');text($('final-order'),[...block.solution.path].map(id=>block.loops[id].alias).join(' → '));text($('eqp'),run.trace.eqp.join('\n'));text($('sql'),run.sql);text($('provenance'),JSON.stringify({setting:run.setting,source_id:bundle.metadata.sqlite_source_id,trace_mask:bundle.metadata.trace_mask,database_sha256:bundle.metadata.database.sha256,database_unchanged:bundle.metadata.database_unchanged,path_limit_basis:block.path_limit_basis},null,2));text($('access-log'),[...block.access_events,...block.annotations].sort((a,b)=>a.source_line-b.source_line).map(x=>`${x.source_line} ${x.raw}`).join('\n'));text($('footer-meta'),`Captured ${bundle.metadata.captured_utc.slice(0,10)} · ${run.id} · pass ${state.pass+1}`);renderJoinGraph(run);renderPaths(pass,block);renderEvents(round);renderDetail();renderComparison();
+ renderSearchView();
+}
+$('run').addEventListener('change',()=>{state.run=Number($('run').value);state.pass=0;state.round=1;state.selection=null;updatePasses();render();});
+$('pass').addEventListener('change',()=>{state.pass=Number($('pass').value);state.round=0;state.selection=null;render();});
+for(const [id,delta] of [['prev',-1],['next',1]])$(''+id).addEventListener('click',()=>{state.round+=delta;state.selection=null;render();});
+$('event-filter').addEventListener('change',()=>renderEvents(current().round));
+$('file').addEventListener('change',async()=>{try{const file=$('file').files[0];if(file)load(JSON.parse(await file.text()));}catch(e){text($('error'),e.message);$('error').style.display='block';}});
+const embeddedData = $('project-data').textContent;
+if (embeddedData.trim().startsWith('__')) {
+  $('template-notice').hidden = false;
+  $('viewer-main').hidden = true;
+} else {
+  try{load(JSON.parse(embeddedData));const params=new URLSearchParams(location.hash.slice(1));if(params.has('run')){const index=bundle.runs.findIndex(r=>r.id===params.get('run'));if(index>=0){state.run=index;state.pass=Math.min(Math.max(0,Number(params.get('pass'))||0),bundle.runs[index].trace.blocks[0].passes.length-1);updatePasses();state.round=Math.min(Math.max(0,(Number(params.get('depth'))||2)-1),current().pass.rounds.length-1);$('run').value=index;render();}}}catch(e){text($('error'),e.message);$('error').style.display='block';}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+*** Optimizer Start *** (wctrlFlags: 0x0)
+    add: * 0.01.00            r                     f 004000 N 1 cost 63,45,43
+replace: * 0.01.00            r                     f 004000 N 1 cost 63,45,43
+   with: * 0.01.00            r                     f 800100 N 0 cost 0,39,3
+    add: * 0.01.02            r                     f 801101 N 1 cost 0,24,-1
+    add: * 1.02.00            n                     f 000100 N 0 cost 0,62,46
+    add: * 1.02.04            n                     f 001101 N 1 cost 0,29,0
+    add: * 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23
+   skip: * 1.02.05            n.idx_nation_regionkey  2 f 011201 N 2 cost 0,32,0
+    add: * 2.04.00            c                     f 000100 N 0 cost 0,188,172
+    add: * 2.04.08            c                     f 001101 N 1 cost 0,43,0
+replace: * 2.04.00            c                     f 000100 N 0 cost 0,188,172
+   with: * 2.04.00            c.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172
+    add: * 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125
+    add: * 2.04.0a            c.idx_customer_nationkey  2 f 011241 N 2 cost 0,41,0
+    add: * 3.08.00            o                     f 000100 N 0 cost 0,221,205
+replace: * 3.08.00            o                     f 000100 N 0 cost 0,221,205
+   with: * 3.08.00            o.idx_orders_custkey  0 f 000240 N 0 cost 0,212,205
+    add: * 3.08.04            o.idx_orders_custkey  1 f 010241 N 1 cost 0,55,40
+0 0.01.00            r                     f 800100 N 0 cost 0,39,3
+1 0.01.02            r                     f 801101 N 1 cost 0,24,-1
+2 1.02.00            n                     f 000100 N 0 cost 0,62,46
+3 1.02.04            n                     f 001101 N 1 cost 0,29,0
+4 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23
+5 2.04.00            c.idx_customer_nationkey  0 f 000240 N 0 cost 0,178,172
+6 2.04.08            c                     f 001101 N 1 cost 0,43,0
+7 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125
+8 2.04.0a            c.idx_customer_nationkey  2 f 011241 N 2 cost 0,41,0
+9 3.08.00            o.idx_orders_custkey  0 f 000240 N 0 cost 0,212,205
+a 3.08.04            o.idx_orders_custkey  1 f 010241 N 1 cost 0,55,40
+---- begin solver.  (nRowEst=0, nQueryLoop=0)
+New    0 cost=40 ,  3, 38 order=0
+New    2 cost=62 , 46, 60 order=0
+New    5 cost=178,172,176 order=0
+New    9 cost=212,205,210 order=0
+---- after round 0 ----
+ 0 cost=40  nrow=3   order=0
+ 2 cost=62  nrow=46  order=0
+ 5 cost=178 nrow=172 order=0
+ 9 cost=212 nrow=205 order=0
+New    02 cost=67 , 49, 65 order=0
+Update 04 cost=56 , 26, 54 order=0  was 02 cost=67 , 49, 65 order=0
+New    05 cost=181,175,179 order=0
+New    09 cost=215,208,213 order=0
+Skip   20 cost=87 , 49, 85 order=0   vs 04 cost=56 , 26, 54 order=0
+Skip   21 cost=76 , 45, 74 order=0   vs 04 cost=56 , 26, 54 order=0
+New    25 cost=224,218,222 order=0
+Update 27 cost=177,171,175 order=0  was 25 cost=224,218,222 order=0
+New    29 cost=258,251,256 order=0
+Skip   50 cost=212,175,210 order=0   vs 05 cost=181,175,179 order=0
+Skip   52 cost=234,218,232 order=0   vs 27 cost=177,171,175 order=0
+Skip   53 cost=203,172,201 order=0   vs 27 cost=177,171,175 order=0
+New    59 cost=384,377,382 order=0
+Update 5a cost=227,212,225 order=0  was 59 cost=384,377,382 order=0
+Skip   90 cost=245,208,243 order=0   vs 09 cost=215,208,213 order=0
+Skip   92 cost=267,251,265 order=0   vs 29 cost=258,251,256 order=0
+Skip   95 cost=383,377,381 order=0   vs 5a cost=227,212,225 order=0
+Skip   96 cost=249,205,247 order=0   vs 5a cost=227,212,225 order=0
+---- after round 1 ----
+ 04 cost=56  nrow=26  order=0
+ 27 cost=177 nrow=171 order=0
+ 05 cost=181 nrow=175 order=0
+ 09 cost=215 nrow=208 order=0
+ 5a cost=227 nrow=212 order=0
+ 29 cost=258 nrow=251 order=0
+New    045 cost=204,198,202 order=0
+Update 047 cost=157,151,155 order=0  was 045 cost=204,198,202 order=0
+New    049 cost=238,231,236 order=0
+Skip   052 cost=237,221,235 order=0   vs 047 cost=157,151,155 order=0
+Skip   053 cost=206,175,204 order=0   vs 047 cost=157,151,155 order=0
+Skip   054 cost=224,198,222 order=0   vs 047 cost=157,151,155 order=0
+New    059 cost=387,380,385 order=0
+Update 05a cost=230,215,228 order=0  was 059 cost=387,380,385 order=0
+Skip   092 cost=270,254,268 order=0   vs 049 cost=238,231,236 order=0
+Skip   094 cost=257,231,255 order=0   vs 049 cost=238,231,236 order=0
+Skip   095 cost=386,380,384 order=0   vs 05a cost=230,215,228 order=0
+Skip   096 cost=252,208,250 order=0   vs 05a cost=230,215,228 order=0
+Skip   270 cost=211,174,209 order=0   vs 047 cost=157,151,155 order=0
+Skip   271 cost=198,170,196 order=0   vs 047 cost=157,151,155 order=0
+New    279 cost=383,376,381 order=0
+Update 27a cost=226,211,224 order=0  was 279 cost=383,376,381 order=0
+Skip   290 cost=291,254,289 order=0   vs 049 cost=238,231,236 order=0
+Skip   291 cost=278,250,276 order=0   vs 049 cost=238,231,236 order=0
+Skip   295 cost=429,423,427 order=0   vs 27a cost=226,211,224 order=0
+Skip   296 cost=295,251,293 order=0   vs 27a cost=226,211,224 order=0
+Skip   297 cost=382,376,380 order=0   vs 27a cost=226,211,224 order=0
+Skip   298 cost=293,251,291 order=0   vs 27a cost=226,211,224 order=0
+Skip   5a0 cost=253,215,251 order=0   vs 05a cost=230,215,228 order=0
+Skip   5a2 cost=275,258,273 order=0   vs 27a cost=226,211,224 order=0
+Skip   5a3 cost=245,212,243 order=0   vs 27a cost=226,211,224 order=0
+---- after round 2 ----
+ 047 cost=157 nrow=151 order=0
+ 27a cost=226 nrow=211 order=0
+ 05a cost=230 nrow=215 order=0
+ 049 cost=238 nrow=231 order=0
+New    0479 cost=363,356,361 order=0
+Update 047a cost=206,191,204 order=0  was 0479 cost=363,356,361 order=0
+Skip   0495 cost=409,403,407 order=0   vs 047a cost=206,191,204 order=0
+Skip   0496 cost=275,231,273 order=0   vs 047a cost=206,191,204 order=0
+Skip   0497 cost=362,356,360 order=0   vs 047a cost=206,191,204 order=0
+Skip   0498 cost=273,231,271 order=0   vs 047a cost=206,191,204 order=0
+Skip   05a2 cost=278,261,276 order=0   vs 047a cost=206,191,204 order=0
+Skip   05a3 cost=248,215,246 order=0   vs 047a cost=206,191,204 order=0
+Skip   05a4 cost=264,238,262 order=0   vs 047a cost=206,191,204 order=0
+Skip   27a0 cost=252,214,250 order=0   vs 047a cost=206,191,204 order=0
+Skip   27a1 cost=241,210,239 order=0   vs 047a cost=206,191,204 order=0
+---- after round 3 ----
+ 047a cost=206 nrow=191 order=0
+---- Solution cost=206, nRow=191
+0 0.01.00            r                     f 800100 N 0 cost 0,39,3
+4 1.02.01            n.idx_nation_regionkey  1 f 010201 N 1 cost 0,48,23
+7 2.04.02            c.idx_customer_nationkey  1 f 010241 N 1 cost 0,131,125
+a 3.08.04            o.idx_orders_custkey  1 f 010241 N 1 cost 0,55,40
+*** Optimizer Finished ***
+QUERY PLAN
+|--SCAN r
+|--SEARCH n USING INDEX idx_nation_regionkey (n_regionkey=?)
+|--SEARCH c USING COVERING INDEX idx_customer_nationkey (c_nationkey=?)
+`--SEARCH o USING COVERING INDEX idx_orders_custkey (o_custkey=?)

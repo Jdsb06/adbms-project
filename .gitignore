@@ -2,3 +2,5 @@
 /data/
 /logs/
 /scripts/__pycache__/
+__pycache__/
+/output/qa/
